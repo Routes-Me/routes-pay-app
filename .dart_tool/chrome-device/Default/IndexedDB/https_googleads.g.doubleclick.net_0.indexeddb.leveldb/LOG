@@ -1,0 +1,5 @@
+2021/04/12-13:21:00.872 23a3f Reusing MANIFEST /private/var/folders/y7/ltg1_fc57rv0f673c19z8yt00000gn/T/flutter_tools.a5JeNi/flutter_tools_chrome_device.UzDFPI/Default/IndexedDB/https_googleads.g.doubleclick.net_0.indexeddb.leveldb/MANIFEST-000001
+2021/04/12-13:21:11.321 23a3f Level-0 table #5: started
+2021/04/12-13:21:11.329 23a3f Level-0 table #5: 364 bytes OK
+2021/04/12-13:21:11.338 23a3f Delete type=0 #3
+2021/04/12-13:21:11.340 23a3f Manual compaction at level-0 from (begin) .. (end); will stop at (end)

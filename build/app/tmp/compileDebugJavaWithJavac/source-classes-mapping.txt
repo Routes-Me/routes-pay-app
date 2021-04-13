@@ -1,0 +1,4 @@
+io/flutter/plugins/GeneratedPluginRegistrant.java
+ io.flutter.plugins.GeneratedPluginRegistrant
+com/routesme/routes_pay/BuildConfig.java
+ com.routesme.routes_pay.BuildConfig
