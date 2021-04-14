@@ -6,7 +6,12 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
-    runApp(MaterialApp(debugShowCheckedModeBanner: false, home: Login()));
+    runApp(MaterialApp(debugShowCheckedModeBanner: false,
+        initialRoute: '/login',
+        routes: {
+          "/login" : (context) => Login(),
+        },
+       ));
   });
 }
 
