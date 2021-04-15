@@ -92,8 +92,20 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "get_it",
+      "rootUri": "file:///Users/mac/developer/flutter/.pub-cache/hosted/pub.dartlang.org/get_it-6.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "http",
       "rootUri": "file:///Users/mac/developer/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.13.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "http_interceptor",
+      "rootUri": "file:///Users/mac/developer/flutter/.pub-cache/hosted/pub.dartlang.org/http_interceptor-0.4.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -122,6 +134,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "nested",
+      "rootUri": "file:///Users/mac/developer/flutter/.pub-cache/hosted/pub.dartlang.org/nested-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "path",
       "rootUri": "file:///Users/mac/developer/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.0",
       "packageUri": "lib/",
@@ -136,6 +154,12 @@
     {
       "name": "pointycastle",
       "rootUri": "file:///Users/mac/developer/flutter/.pub-cache/hosted/pub.dartlang.org/pointycastle-3.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "provider",
+      "rootUri": "file:///Users/mac/developer/flutter/.pub-cache/hosted/pub.dartlang.org/provider-5.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -200,7 +224,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-04-14T12:58:28.810095Z",
+  "generated": "2021-04-15T10:24:31.821889Z",
   "generator": "pub",
   "generatorVersion": "2.12.2"
 }

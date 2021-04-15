@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:provider/provider.dart';
+import 'package:routes_pay/datasource/api_response.dart';
 import 'package:routes_pay/encrption/aesencryption.dart';
+import 'package:routes_pay/ui/model/data_model.dart';
+import 'package:routes_pay/ui/viewmodel/login_viewmodel.dart';
 
 class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
 }
-
-
 class _LoginState extends State<Login> {
   final validateForm = GlobalKey<FormState>();
   final encryption = AESEncryption();
@@ -21,6 +23,7 @@ class _LoginState extends State<Login> {
   }
   @override
   Widget build(BuildContext context) {
+    ApiResponse apiResponse = Provider.of<LoginViewModel>(context).response;
     return Form(
       key: validateForm,
       child: Scaffold(
@@ -140,8 +143,22 @@ class _LoginState extends State<Login> {
                               child: ElevatedButton(
                                 child: Text("Continue"),
                                 onPressed: () {
+                                  print('${encryption.encrypt(passwordController.text)},${emailController.text}');
                                   if (validateForm.currentState.validate()){
                                     encryption.encrypt(passwordController.text);
+                                    ;
+                                    //print('${encryption.encrypt(passwordController.text)},${emailController.text}');
+                                    Provider.of<LoginViewModel>(context,listen: false).signIn(SignInModel(username: emailController.text,password: encryption.encrypt(passwordController.text).toString()));
+                                    switch(apiResponse.status){
+                                      case Status.LOADING :
+                                        return Center(child: CircularProgressIndicator(),);
+                                      case Status.COMPLETED :
+                                        return ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Login Successfull')));
+                                      case Status.ERROR :
+                                       return ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(apiResponse.message)));
+                                      default:
+                                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(apiResponse.message)));
+                                    }
                                     //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Processing Data')));
                                   }
                                 },
@@ -278,6 +295,8 @@ class _LoginState extends State<Login> {
       ),
     );
   }
+
+
 
 }
 

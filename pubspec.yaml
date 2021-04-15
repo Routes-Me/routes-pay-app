@@ -31,6 +31,9 @@ dependencies:
   form_field_validator: ^1.1.0
   encrypt: ^5.0.0
   http: ^0.13.1
+  provider: ^5.0.0
+  get_it: ^6.1.1
+  http_interceptor: ^0.4.0
 
 dev_dependencies:
   flutter_test:
