@@ -9,4 +9,10 @@ class AppException implements Exception{
     return "$_prefix$_message";
   }
 
+
+}
+
+class UnauthorisedException extends AppException {
+
+  UnauthorisedException([message]) : super(message, "Unauthorised Request: ");
 }

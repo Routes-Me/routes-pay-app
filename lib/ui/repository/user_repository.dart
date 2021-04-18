@@ -6,11 +6,11 @@ import '../../datasource/base_service.dart';
 class UserRepository{
 
   BaseService baseService = DataSource();
-  Future<User> signIn(SignInModel parameter) async {
-    String url = "";
-    dynamic response = await baseService.getResponse(parameter,url);
+  Future<User> signIn(Map<String, String> params) async {
+    String url = "authentications";
+    dynamic response = await baseService.postResponse(params,url);
     final jsonData = response['token'];
-    print('$jsonData');
+    print('Response $jsonData');
     //User userItem = jsonData.map((tagJson) => User.fromJson(tagJson));
     User userItem = User(token:jsonData);
     return userItem;

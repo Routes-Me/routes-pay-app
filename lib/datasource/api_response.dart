@@ -3,6 +3,8 @@ class ApiResponse<T>{
   T data;
   String message;
 
+  ApiResponse.initial(this.message) : status = Status.INITIAL;
+
   ApiResponse.loading(this.message) : status = Status.LOADING;
 
   ApiResponse.completed(this.data) : status = Status.COMPLETED;

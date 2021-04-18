@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:http_interceptor/http_interceptor.dart';
 import 'package:routes_pay/datasource/interceptor/LoginInterceptor.dart';
 import 'package:routes_pay/datasource/interceptor/expire_retry_policy.dart';
+import 'package:routes_pay/exception/app_exception.dart';
 import 'package:routes_pay/exception/bad_request_exception.dart';
 import 'package:routes_pay/exception/fetch_data_exception.dart';
 import 'package:routes_pay/ui/model/data_model.dart';
@@ -13,7 +14,7 @@ import 'base_service.dart';
 class DataSource extends BaseService{
   HttpClientWithInterceptor client = HttpClientWithInterceptor.build(interceptors: [LoginInterceptor()],retryPolicy: ExpireRetryPolicy());
   @override
-  Future getResponse(SignInModel signInModel,String url) async {
+  Future getResponse(Map<String, String> params,String url) async {
     dynamic responseJson;
     try {
       final response = await client.get(Uri.parse(baseUrl + url));
@@ -25,10 +26,12 @@ class DataSource extends BaseService{
   }
 
   @override
-  Future postResponse(String url) async {
+  Future postResponse(Map<String, String> params,String url) async {
     dynamic responseJson;
     try {
-      final response = await client.post(Uri.parse(baseUrl + url));
+      final response = await client.post(Uri.parse(baseUrl + url),
+          body:json.encode(params)
+      );
       responseJson = returnResponse(response);
     } on SocketException {
       throw FetchDataException('No Internet Connection');
@@ -45,7 +48,8 @@ class DataSource extends BaseService{
         return responseJson;
       case 400:
         throw BadRequestException(response.body.toString());
-
+      case 401 :
+       throw UnauthorisedException(response.body.toString());
       case 500:
       default:
         throw FetchDataException(
