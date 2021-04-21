@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
  class EncryptModel{
 
-    final key = "PBKDF2WithHmacSHA1";
-    final iv = "Qz-N!p#ATb9_2MkL";
+    final key = "Wf6cXM10cj_7B)V,";
+    final iv = "7w'}DkAkO!A&mLyL";
     final charsetName = "UTF-8";
 }

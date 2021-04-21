@@ -3,24 +3,27 @@ import 'package:routes_pay/data/pojo/user.dart';
 import 'package:routes_pay/datasource/api_response.dart';
 import 'package:routes_pay/ui/repository/user_repository.dart';
 
-class LoginViewModel with ChangeNotifier{
+class LoginViewModel with ChangeNotifier {
+  BuildContext context;
+
   ApiResponse _apiResponse = ApiResponse.initial('Loading From Model');
-  ApiResponse get response =>_apiResponse;
+  final userRepository = UserRepository();
 
-  Future <void> signIn(Map<String, String> params) async {
+  ApiResponse get response => _apiResponse;
+
+  Future<void> signIn(Map<String, String> params, BuildContext context) async {
     try {
-      User userItem = await UserRepository().signIn(params);
+      User userItem = await userRepository.signIn(params, context);
       setState(ApiResponse.completed(userItem));
-
     } catch (e) {
-      setState(ApiResponse.error("Wrong Email id and Password"));
+      //print("Error Response ${e.toString()}");
+      setState(ApiResponse.error(e.toString()));
     }
     notifyListeners();
   }
 
-  void setState(ApiResponse apiResponse){
+  void setState(ApiResponse apiResponse) {
     _apiResponse = apiResponse;
     notifyListeners();
   }
-
 }
