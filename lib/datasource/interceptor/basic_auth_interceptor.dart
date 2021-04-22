@@ -22,10 +22,10 @@ class BasicAuthInterceptor extends InterceptorContract {
   }
   @override
   Future<ResponseData> interceptResponse({ResponseData data}) async {
-
     switch (data.statusCode) {
       case 401:
         Future.delayed(Duration(seconds: 5), () {
+
           //Redirect to renewal token page if user is already login
           if (isLogin){
             Navigator.pushNamedAndRemoveUntil(

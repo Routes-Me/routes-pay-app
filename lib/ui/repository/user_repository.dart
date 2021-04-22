@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:routes_pay/data/pojo/user.dart';
 import 'package:routes_pay/datasource/data_source.dart';
@@ -7,11 +9,12 @@ class UserRepository {
   BaseService baseService = DataSource();
 
   Future<User> signIn(Map<String, String> params, BuildContext context) async {
-    String url = "authentications";
+    //String url = "authentications";
+    String url = "login";
     dynamic response = await baseService.postResponse(params, url, context);
     final jsonData = response['token'];
-    print('Response $jsonData');
-    //User userItem = jsonData.map((tagJson) => User.fromJson(tagJson));
+    //Map<String,dynamic> jsonDecodeData  = json.decode(response.trim());
+    //User userItem = response.map((d) => User.fromJson(d));
     User userItem = User(token: jsonData);
     return userItem;
   }

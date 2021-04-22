@@ -35,6 +35,8 @@ dependencies:
   get_it: ^6.1.1
   http_interceptor: ^0.4.0
   localstorage: ^4.0.0+1
+  shared_preferences: ^2.0.5
+  qr_flutter: ^4.0.0
 
 
 dev_dependencies:

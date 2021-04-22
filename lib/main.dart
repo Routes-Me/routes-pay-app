@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:routes_pay/ui/auth/login.dart';
 import 'package:routes_pay/ui/auth/renewal_token.dart';
+import 'package:routes_pay/ui/auth/splashscreen.dart';
 import 'package:routes_pay/ui/home/Home.dart';
 import 'package:routes_pay/ui/viewmodel/login_viewmodel.dart';
 
@@ -25,8 +26,9 @@ class Routes extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/login',
+      initialRoute: '/',
       routes: {
+        "/": (context) => SplashScreen(),
         "/login": (context) => Login(),
         "/home": (context) => Home(),
         "/renewal": (context) => RenewalToken(),
