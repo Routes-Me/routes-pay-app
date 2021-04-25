@@ -21,12 +21,19 @@ class AESEncryption{
     final fullSalt = getSalt(16);
     final realSalt = fullSalt.replaceAll(RegExp("${saltExcluded.split('')}"),'');
     final encryptStr = encrypt(realSalt,password);
+    print("Encrypt Text ${encryptStr}");
     final saltPart1 = fullSalt.substring(0,10);
+    print("Encrypt Text saltPart1 ${saltPart1}");
     final saltPart2 = fullSalt.substring(10);
+    print("Encrypt Text saltPart2 ${saltPart2}");
     final encryptTextFormat1 = encryptStr.substring(0,saltBeginIndex+1) + saltPart1+encryptStr.substring(saltBeginIndex + 1);
+    print("Encrypt Text encryptTextFormat1 ${encryptTextFormat1}");
     final index = saltPart1.length+1+saltBeginIndex;
+    print("Encrypt Text index ${index}");
     final encryptTextFormat2 = encryptTextFormat1.substring(0,index+1)+saltPart2+encryptTextFormat1.substring(index + 1);
+    print("Encrypt Text encryptTextFormat2 ${encryptTextFormat2}");
     final result = saltIndexChars+saltExcluded+encryptTextFormat2;
+    print("Encrypt Text result ${result}");
     return result;
   }
   String encrypt(String salt,String password){

@@ -6,8 +6,8 @@ import 'package:http_interceptor/models/retry_policy.dart';
 
 class ExpireRetryPolicy extends RetryPolicy {
   @override
-  int maxRetryAttempts = 10;
-
+  int maxRetryAttempts = 5;
+  bool isLogin = false;
   ExpireRetryPolicy(BuildContext context);
 
   @override
@@ -21,18 +21,19 @@ class ExpireRetryPolicy extends RetryPolicy {
     //You can check if you got your response after certain timeout,
     //or if you want to retry your request based on the status code,
     //usually this is used for refreshing your expired token but you can check for what ever you want
-
     //your should write a condition here so it won't execute this code on every request
     //for example if(response == null)
     // a very basic solution is that you can check
     // for internet connection, for example
     try {
-     if(response.statusCode == HttpStatus.UNAUTHORIZED){
-       print("Perform your token refresh here in 401");
-       return true;
-     }else{
-       return false;
-     }
+        if(response.statusCode == HttpStatus.UNAUTHORIZED){
+          if(isLogin){
+            print("Perform your token refresh here in 401");
+            return true;
+          }
+        }else{
+          return false;
+        }
     } on SocketException catch (_) {
       print("Perform your token refresh here in onSocket Exception");
       return false;

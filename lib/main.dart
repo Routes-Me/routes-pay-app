@@ -6,6 +6,7 @@ import 'package:routes_pay/ui/auth/renewal_token.dart';
 import 'package:routes_pay/ui/auth/splashscreen.dart';
 import 'package:routes_pay/ui/home/Home.dart';
 import 'package:routes_pay/ui/viewmodel/login_viewmodel.dart';
+import 'package:routes_pay/ui/viewmodel/register_viewmodel.dart';
 
 import 'locator.dart';
 
@@ -14,8 +15,11 @@ void main() {
   setUpLocation();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
-    runApp(ChangeNotifierProvider(
-      create: (context) => LoginViewModel(),
+    runApp(MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(value: LoginViewModel()),
+        ChangeNotifierProvider.value(value: RegisterViewModel()),
+      ],
       child: Routes(),
     ));
   });

@@ -6,10 +6,12 @@ import 'package:http_interceptor/http_interceptor.dart';
 import 'package:routes_pay/datasource/interceptor/api_interceptor.dart';
 import 'package:routes_pay/exception/bad_request_exception.dart';
 import 'package:routes_pay/exception/fetch_data_exception.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'base_service.dart';
 
 class DataSource extends BaseService {
   HttpClientWithInterceptor client;
+  Map<String, String> headers = {};
   @override
   Future getResponse(
       Map<String, String> params, String url, BuildContext context) async {
@@ -24,6 +26,8 @@ class DataSource extends BaseService {
     return responseJson;
   }
 
+
+
   @override
   Future postResponse(
       Map<String, String> params, String url, BuildContext context) async {
@@ -32,11 +36,22 @@ class DataSource extends BaseService {
       client = ApiInterceptor(context).client;
       final response = await client.post(Uri.parse(baseUrl + url),
           body: json.encode(params));
+       await updateCookie(response);
       responseJson = returnResponse(response);
     } on SocketException {
       throw FetchDataException('No Internet Connection');
     }
     return responseJson;
+  }
+
+  void updateCookie(http.Response response) async {
+    String rawCookie = response.headers['set-cookie'];
+    if (rawCookie != null) {
+      final List<String> cookie = rawCookie.split(';')[0].split('=');
+      //print("${cookie[1]}");
+      SharedPreferences setRefreshToken = await SharedPreferences.getInstance();
+      await setRefreshToken.setString('refreshToken', cookie[1]);
+    }
   }
 
   @visibleForTesting

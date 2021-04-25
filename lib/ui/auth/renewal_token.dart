@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:routes_pay/data/pojo/user.dart';
+import 'package:routes_pay/data/pojo/user_token.dart';
 import 'package:routes_pay/ui/repository/user_repository.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RenewalToken extends StatefulWidget {
   @override
@@ -44,22 +46,28 @@ class _RenewalTokenState extends State<RenewalToken> {
     );
   }
 
-  void renewToken() {
-    Map<String,String> allvalues = {
-      'refreshToken' : "",
-      'access_token' : ""
-    };
-    Future<void> renewalToken(Map<String, String> params, BuildContext context) async {
-      try {
-        User userItem = await userRepository.signIn(params, context);
+  void renewToken() async {
+    SharedPreferences prefs =await SharedPreferences.getInstance();
+    String refreshToken = prefs.getString('refreshToken');
+    if(refreshToken !=null){
+      Map<String,String> allvalues = {
+        'refreshToken' : refreshToken,
+      };
+      try{
+        UserToken userToken =  await userRepository.renewalToken(allvalues, context);
+        prefs.setString('refreshToken', userToken.refreshToken);
+        prefs.setString('token', userToken.accessToken);
+        Navigator.pushNamedAndRemoveUntil(context, "/home", (Route<dynamic> route) => false);
+      }catch(e){
 
-      } catch (e) {
-        print("Error Response ${e.toString()}");
+        Navigator.pushNamedAndRemoveUntil(context, "/login", (Route<dynamic> route) => false);
 
       }
 
+
     }
-    userRepository.renewalToken(allvalues, context);
+
+
 
   }
 }

@@ -63,7 +63,6 @@ class _SplashScreenState extends State<SplashScreen> {
     return Timer(_duration,navigationPage);
   }
     void navigationPage() async{
-
       SharedPreferences preferences = await SharedPreferences.getInstance();
       final isLogin = false;
       if((!isLogin)){
