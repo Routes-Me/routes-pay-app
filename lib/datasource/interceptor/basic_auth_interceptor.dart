@@ -8,9 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 class BasicAuthInterceptor extends InterceptorContract {
   BuildContext context;
   BasicAuthInterceptor(this.context);
-  final isLogin = false;
-  final LocalStorage storage = new LocalStorage('isLogin');
-  
   @override
   Future<RequestData> interceptRequest({RequestData data}) async {
     SharedPreferences accessToken = await SharedPreferences.getInstance();
@@ -24,19 +21,16 @@ class BasicAuthInterceptor extends InterceptorContract {
   }
   @override
   Future<ResponseData> interceptResponse({ResponseData data}) async {
-    print(data);
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    final isLogin = (preferences.getBool('isLogin') == null) ? false : preferences.getBool('isLogin');
     switch (data.statusCode) {
       case 401:
-        Future.delayed(Duration(seconds: 1), () {
-
           if (isLogin){
             Navigator.pushNamedAndRemoveUntil(
                 context, "/home", (Route<dynamic> route) => false);
           }else{
-
-            UnauthorisedException("Wrong Email id and password");
+            throw UnauthorisedException("Wrong Email id and password");
           }
-        });
         break;
       default:
     }

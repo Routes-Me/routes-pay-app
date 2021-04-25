@@ -59,7 +59,6 @@ class _RenewalTokenState extends State<RenewalToken> {
         prefs.setString('token', userToken.accessToken);
         Navigator.pushNamedAndRemoveUntil(context, "/home", (Route<dynamic> route) => false);
       }catch(e){
-
         Navigator.pushNamedAndRemoveUntil(context, "/login", (Route<dynamic> route) => false);
 
       }

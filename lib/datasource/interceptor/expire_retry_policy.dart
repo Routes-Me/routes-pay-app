@@ -26,14 +26,15 @@ class ExpireRetryPolicy extends RetryPolicy {
     // a very basic solution is that you can check
     // for internet connection, for example
     try {
-        if(response.statusCode == HttpStatus.UNAUTHORIZED){
-          if(isLogin){
-            print("Perform your token refresh here in 401");
+      Future.delayed(Duration(seconds: 1), () {
+        switch(response.statusCode){
+          case HttpStatus.BAD_REQUEST :
             return true;
-          }
-        }else{
-          return false;
+          case HttpStatus.NOT_ACCEPTABLE :
+            return false;
         }
+      });
+
     } on SocketException catch (_) {
       print("Perform your token refresh here in onSocket Exception");
       return false;

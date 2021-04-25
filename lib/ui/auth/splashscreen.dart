@@ -64,11 +64,10 @@ class _SplashScreenState extends State<SplashScreen> {
   }
     void navigationPage() async{
       SharedPreferences preferences = await SharedPreferences.getInstance();
-      final isLogin = false;
+      final isLogin = (preferences.getBool('isLogin') == null) ? false : preferences.getBool('isLogin');
       if((!isLogin)){
         Navigator.pushReplacement(context, MaterialPageRoute(
             builder: (context) => Login()));
-
       }else{
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => Home()));
