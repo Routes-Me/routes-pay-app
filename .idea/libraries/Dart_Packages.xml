@@ -2,6 +2,13 @@
   <library name="Dart Packages" type="DartPackagesLibraryType">
     <properties>
       <option name="packageNameToDirsMap">
+        <entry key="aes_crypt">
+          <value>
+            <list>
+              <option value="$USER_HOME$/developer/flutter/.pub-cache/hosted/pub.dartlang.org/aes_crypt-0.1.1/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="args">
           <value>
             <list>
@@ -418,6 +425,7 @@
       </option>
     </properties>
     <CLASSES>
+      <root url="file://$USER_HOME$/developer/flutter/.pub-cache/hosted/pub.dartlang.org/aes_crypt-0.1.1/lib" />
       <root url="file://$USER_HOME$/developer/flutter/.pub-cache/hosted/pub.dartlang.org/args-2.0.0/lib" />
       <root url="file://$USER_HOME$/developer/flutter/.pub-cache/hosted/pub.dartlang.org/asn1lib-1.0.0/lib" />
       <root url="file://$USER_HOME$/developer/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.5.0/lib" />

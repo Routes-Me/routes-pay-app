@@ -2,6 +2,10 @@ routes_pay
 2.7
 file:///Users/mac/Desktop/PROJECTS/routes_pay/
 file:///Users/mac/Desktop/PROJECTS/routes_pay/lib/
+aes_crypt
+2.7
+file:///Users/mac/developer/flutter/.pub-cache/hosted/pub.dartlang.org/aes_crypt-0.1.1/
+file:///Users/mac/developer/flutter/.pub-cache/hosted/pub.dartlang.org/aes_crypt-0.1.1/lib/
 args
 2.12
 file:///Users/mac/developer/flutter/.pub-cache/hosted/pub.dartlang.org/args-2.0.0/

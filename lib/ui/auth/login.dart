@@ -173,8 +173,8 @@ class _LoginState extends State<Login> {
                                                     Map<String, String> params = {
                                                       'username':
                                                           emailController.text,
-                                                      'password':'%JhujMD7MGVkL2pXpiD1ADYveiTDGXg8uh5hSeB2JU3Q=='
-                                                      //'password': encryption.encryptText(passwordController.text)
+                                                      //'password':'%JhujMD7MGVkL2pXpiD1ADYveiTDGXg8uh5hSeB2JU3Q=='
+                                                      'password': encryption.encryptText(passwordController.text)
                                                     };
                                                     provider.setState(
                                                         ApiResponse.loading(""));
