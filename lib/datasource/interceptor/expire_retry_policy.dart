@@ -12,12 +12,11 @@ class ExpireRetryPolicy extends RetryPolicy {
 
   @override
   bool shouldAttemptRetryOnException(Exception reason) {
-
     return super.shouldAttemptRetryOnException(reason);
   }
   @override
   Future<bool> shouldAttemptRetryOnResponse(ResponseData response) async {
-   // print("Retry Policy 2${response}");
+    // print("Retry Policy 2${response}");
     //You can check if you got your response after certain timeout,
     //or if you want to retry your request based on the status code,
     //usually this is used for refreshing your expired token but you can check for what ever you want

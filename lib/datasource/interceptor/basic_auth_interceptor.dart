@@ -27,7 +27,7 @@ class BasicAuthInterceptor extends InterceptorContract {
       case 401:
           if (isLogin){
             Navigator.pushNamedAndRemoveUntil(
-                context, "/home", (Route<dynamic> route) => false);
+                context, "/renewal", (Route<dynamic> route) => false);
           }else{
             throw UnauthorisedException("Wrong Email id and password");
           }

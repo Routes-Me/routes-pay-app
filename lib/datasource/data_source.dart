@@ -26,8 +26,6 @@ class DataSource extends BaseService {
     return responseJson;
   }
 
-
-
   @override
   Future postResponse(
       Map<String, String> params, String url, BuildContext context) async {
@@ -48,7 +46,6 @@ class DataSource extends BaseService {
     String rawCookie = response.headers['set-cookie'];
     if (rawCookie != null) {
       final List<String> cookie = rawCookie.split(';')[0].split('=');
-      //print("${cookie[1]}");
       SharedPreferences setRefreshToken = await SharedPreferences.getInstance();
       await setRefreshToken.setString('refreshToken', cookie[1]);
     }
@@ -57,12 +54,12 @@ class DataSource extends BaseService {
   @visibleForTesting
   dynamic returnResponse(http.Response response) {
     switch (response.statusCode) {
-      case 200:
+      case HttpStatus.OK:
         dynamic responseJson = jsonDecode(response.body);
         return responseJson;
-      case 400:
+      case HttpStatus.BAD_REQUEST:
         throw BadRequestException(response.body.toString());
-      case 500:
+      case HttpStatus.INTERNAL_SERVER_ERROR:
       default:
         throw FetchDataException(
             'Something is wrong please try again later');

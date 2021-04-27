@@ -1,0 +1,109 @@
+Flutter crash report.
+Please report a bug at https://github.com/flutter/flutter/issues.
+
+## command
+
+flutter --quiet assemble --depfile /Users/mac/Desktop/PROJECTS/routes_pay/build/app/intermediates/flutter/release/flutter_build.d --output /Users/mac/Desktop/PROJECTS/routes_pay/build/app/intermediates/flutter/release -dTargetFile=lib/main.dart -dTargetPlatform=android -dBuildMode=release -dTrackWidgetCreation=true -dTreeShakeIcons=true android_aot_bundle_release_android-arm android_aot_bundle_release_android-arm64 android_aot_bundle_release_android-x64
+
+## exception
+
+ArgumentError: Invalid argument(s): Cannot find executable for /Users/mac/developer/flutter/bin/cache/artifacts/engine/android-arm-release/darwin-x64/gen_snapshot.
+
+```
+#0      _getExecutable (package:process/src/interface/local_process_manager.dart:124:5)
+#1      LocalProcessManager.start (package:process/src/interface/local_process_manager.dart:40:30)
+#2      ErrorHandlingProcessManager.start.<anonymous closure> (package:flutter_tools/src/base/error_handling_io.dart:638:33)
+#3      _run (package:flutter_tools/src/base/error_handling_io.dart:532:20)
+#4      ErrorHandlingProcessManager.start (package:flutter_tools/src/base/error_handling_io.dart:638:12)
+#5      _DefaultProcessUtils.start (package:flutter_tools/src/base/process.dart:472:28)
+#6      _DefaultProcessUtils.stream (package:flutter_tools/src/base/process.dart:491:35)
+#7      GenSnapshot.run (package:flutter_tools/src/base/build.dart:73:26)
+#8      AOTSnapshotter.build (package:flutter_tools/src/base/build.dart:194:56)
+#9      AndroidAot.build (package:flutter_tools/src/build_system/targets/android.dart:232:52)
+#10     _BuildInstance._invokeInternal (package:flutter_tools/src/build_system/build_system.dart:796:27)
+<asynchronous suspension>
+#11     Future.wait.<anonymous closure> (dart:async/future.dart)
+<asynchronous suspension>
+#12     _BuildInstance.invokeTarget (package:flutter_tools/src/build_system/build_system.dart:734:32)
+<asynchronous suspension>
+#13     Future.wait.<anonymous closure> (dart:async/future.dart)
+<asynchronous suspension>
+#14     _BuildInstance.invokeTarget (package:flutter_tools/src/build_system/build_system.dart:734:32)
+<asynchronous suspension>
+#15     FlutterBuildSystem.build (package:flutter_tools/src/build_system/build_system.dart:563:16)
+<asynchronous suspension>
+#16     AssembleCommand.runCommand (package:flutter_tools/src/commands/assemble.dart:220:32)
+<asynchronous suspension>
+#17     FlutterCommand.verifyThenRunCommand (package:flutter_tools/src/runner/flutter_command.dart:1157:12)
+<asynchronous suspension>
+#18     FlutterCommand.run.<anonymous closure> (package:flutter_tools/src/runner/flutter_command.dart:1009:27)
+<asynchronous suspension>
+#19     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:150:19)
+<asynchronous suspension>
+#20     AppContext.run (package:flutter_tools/src/base/context.dart:149:12)
+<asynchronous suspension>
+#21     CommandRunner.runCommand (package:args/command_runner.dart:197:13)
+<asynchronous suspension>
+#22     FlutterCommandRunner.runCommand.<anonymous closure> (package:flutter_tools/src/runner/flutter_command_runner.dart:278:9)
+<asynchronous suspension>
+#23     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:150:19)
+<asynchronous suspension>
+#24     AppContext.run (package:flutter_tools/src/base/context.dart:149:12)
+<asynchronous suspension>
+#25     FlutterCommandRunner.runCommand (package:flutter_tools/src/runner/flutter_command_runner.dart:234:5)
+<asynchronous suspension>
+#26     run.<anonymous closure>.<anonymous closure> (package:flutter_tools/runner.dart:64:9)
+<asynchronous suspension>
+#27     run.<anonymous closure> (package:flutter_tools/runner.dart:62:12)
+<asynchronous suspension>
+#28     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:150:19)
+<asynchronous suspension>
+#29     AppContext.run (package:flutter_tools/src/base/context.dart:149:12)
+<asynchronous suspension>
+#30     runInContext (package:flutter_tools/src/context_runner.dart:73:10)
+<asynchronous suspension>
+#31     main (package:flutter_tools/executable.dart:90:3)
+<asynchronous suspension>
+```
+
+## flutter doctor
+
+```
+[!] Flutter (Channel stable, 2.0.4, on Mac OS X 10.15.7 19H524 darwin-x64, locale en-IN)
+    • Flutter version 2.0.4 at /Users/mac/developer/flutter
+    • Framework revision b1395592de (4 weeks ago), 2021-04-01 14:25:01 -0700
+    • Engine revision 2dce47073a
+    • Dart version 2.12.2
+    ✗ Downloaded executables cannot execute on host.
+      See https://github.com/flutter/flutter/issues/6207 for more information
+
+
+[!] Android toolchain - develop for Android devices (Android SDK version 30.0.2)
+    • Android SDK at /Users/mac/Library/Android/sdk
+    • Platform android-30, build-tools 30.0.2
+    • Java binary at: /Applications/Android Studio.app/Contents/jre/jdk/Contents/Home/bin/java
+    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b3-6222593)
+    ! Some Android licenses not accepted.  To resolve this, run: flutter doctor --android-licenses
+
+[!] Xcode - develop for iOS and macOS
+    • Xcode at /Applications/Xcode.app/Contents/Developer
+    • Xcode 11.3, Build version 11C29
+    ! Xcode 11.3.0 out of date (12.0.1 is recommended).
+      Download the latest version or update via the Mac App Store.
+    • CocoaPods version 1.10.0.beta.1
+
+[✓] Chrome - develop for the web
+    • Chrome at /Applications/Google Chrome.app/Contents/MacOS/Google Chrome
+
+[✓] Android Studio (version 4.0)
+    • Android Studio at /Applications/Android Studio.app/Contents
+    • Flutter plugin version 51.0.1
+    • Dart plugin version 193.7547
+    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b3-6222593)
+
+[✓] Connected device (2 available)
+    • Redmi Note 9 Pro (mobile) • 8c1f5d64 • android-arm64  • Android 10 (API 29)
+    • Chrome (web)              • chrome   • web-javascript • Google Chrome 90.0.4430.93
+
+! Doctor found issues in 3 categories.
+```
