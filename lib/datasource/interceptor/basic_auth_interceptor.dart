@@ -15,7 +15,7 @@ class BasicAuthInterceptor extends InterceptorContract {
     data.headers["CountryCode"] = "";
     data.headers["AppVersion"] = "";
     data.headers[HttpHeaders.contentTypeHeader] = "application/json";
-    data.headers["application"] = "routes-app";
+    data.headers["application"] = "screen";
     print(data.toString());
     return data;
   }
