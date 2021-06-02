@@ -12,8 +12,8 @@ class BasicAuthInterceptor extends InterceptorContract {
   Future<RequestData> interceptRequest({RequestData data}) async {
     SharedPreferences accessToken = await SharedPreferences.getInstance();
     data.headers["Authorization"] = accessToken.getString('token');
-    data.headers["CountryCode"] = "";
-    data.headers["AppVersion"] = "";
+    //data.headers["CountryCode"] = "";
+    //data.headers["AppVersion"] = "";
     data.headers[HttpHeaders.contentTypeHeader] = "application/json";
     data.headers["application"] = "screen";
     print(data.toString());
@@ -21,6 +21,7 @@ class BasicAuthInterceptor extends InterceptorContract {
   }
   @override
   Future<ResponseData> interceptResponse({ResponseData data}) async {
+    print(data.toString());
     SharedPreferences preferences = await SharedPreferences.getInstance();
     final isLogin = (preferences.getBool('isLogin') == null) ? false : preferences.getBool('isLogin');
     switch (data.statusCode) {

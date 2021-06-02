@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:routes_pay/data/pojo/message.dart';
 import 'package:routes_pay/datasource/api_response.dart';
 import 'package:routes_pay/ui/repository/user_repository.dart';
 
@@ -7,19 +8,13 @@ class RegisterViewModel extends ChangeNotifier{
   ApiResponse _apiResponse = ApiResponse.initial('Loading From Model');
   final userRepository = UserRepository();
   ApiResponse get response => _apiResponse;
-
-  Future<void> signIn(Map<String, String> params, BuildContext context) async {
+  Future<void> register(Map<String, String> params, BuildContext context) async {
     try {
-      params = {
-        "Email" : 'test32@gmail.com',
-        "PhoneNumber" : '4702232891',
-        "Password" : 'BsF6knjxmpt86770t2LMCWX9O+GKQWzMtABrSnYN3gw==',
-        "Name" : 'Rohit Yadav'
-      };
-      String userItem = await userRepository.register(params, context);
-      setState(ApiResponse.completed(userItem));
+      Message message = await userRepository.register(params, context);
+      print("Response 1 ${message.message}");
+      setState(ApiResponse.completed(message.message));
     } catch (e) {
-
+      print("Response 2 ${e.toString()}");
       setState(ApiResponse.error(e.toString()));
     }
     notifyListeners();

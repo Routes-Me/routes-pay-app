@@ -54,10 +54,15 @@ class DataSource extends BaseService {
   @visibleForTesting
   dynamic returnResponse(http.Response response) {
     switch (response.statusCode) {
+      case HttpStatus.created :
+        dynamic responseJson = jsonDecode(response.body);
+        //print("Response ${responseJson}");
+        return responseJson;
       case HttpStatus.OK:
         dynamic responseJson = jsonDecode(response.body);
         return responseJson;
       case HttpStatus.BAD_REQUEST:
+        print(response.body);
         throw BadRequestException(response.body.toString());
       case HttpStatus.INTERNAL_SERVER_ERROR:
       default:

@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:provider/provider.dart';
@@ -18,10 +19,10 @@ class _LoginState extends State<Login> {
   final encryption = AESEncryption();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final focus = FocusNode();
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -51,7 +52,6 @@ class _LoginState extends State<Login> {
                         ]),
                   ),
                       child: Column(
-
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
@@ -74,6 +74,11 @@ class _LoginState extends State<Login> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     TextFormField(
+                                      textInputAction: TextInputAction.next,
+                                      autofocus: true,
+                                      onFieldSubmitted: (v){
+                                        FocusScope.of(context).requestFocus(focus);
+                                      },
                                       controller: emailController,
                                       validator: MultiValidator([
                                         RequiredValidator(errorText: "* Required"),
@@ -115,6 +120,8 @@ class _LoginState extends State<Login> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     TextFormField(
+                                      //autofocus: true,
+                                      focusNode: focus,
                                       validator: MultiValidator([
                                         RequiredValidator(errorText: "* Required"),
                                         MinLengthValidator(4,
@@ -244,7 +251,9 @@ class _LoginState extends State<Login> {
                                                     RoundedRectangleBorder(
                                                         borderRadius: BorderRadius.circular(8.0),
                                                         side: BorderSide(color: Colors.white)))),
-                                            onPressed: () {}),
+                                            onPressed: () {
+
+                                            }),
                                       ),
                                     ],
                                   ),
@@ -273,12 +282,15 @@ class _LoginState extends State<Login> {
                                       SizedBox(
                                         height: 5,
                                       ),
-                                      Text(
-                                        'Sign Up',
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black),
+                                      GestureDetector(
+                                        onTap: () { Navigator.of(context).pushNamed("/signup"); },
+                                        child: Text(
+                                          'Sign Up',
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black),
+                                        ),
                                       ),
                                       SizedBox(
                                         height: 25,
@@ -323,7 +335,10 @@ class _LoginState extends State<Login> {
                                             ),
                                             TextSpan(
                                               text:
-                                                  " Terms of use and Privacy Policy",
+                                                  "Terms of use and Privacy Policy",
+                                              recognizer: TapGestureRecognizer()..onTap = () {
+                                                // Single tapped.
+                                              },
                                               style: TextStyle(
                                                 fontSize: 17,
                                                 fontWeight: FontWeight.w600,

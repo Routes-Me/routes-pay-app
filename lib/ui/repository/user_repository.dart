@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:routes_pay/data/pojo/message.dart';
 import 'package:routes_pay/data/pojo/user.dart';
 import 'package:routes_pay/data/pojo/user_token.dart';
 import 'package:routes_pay/datasource/data_source.dart';
@@ -17,11 +18,13 @@ class UserRepository {
     return userItem;
   }
 
-  Future<String> register(Map<String,String> params,BuildContext context) async{
-    String url = "routes-pay-app";
+  Future<Message> register(Map<String,String> params,BuildContext context) async{
+    String url = "registrations/routes-pay-app";
     dynamic response = await baseService.postResponse(params, url, context);
-    final jsonData = response;
-    return jsonData;
+    final jsonData = response['message'];
+    //print("Response ${jsonData}");
+    Message message = Message(message:jsonData);
+    return message;
   }
 
   Future<UserToken> renewalToken(Map<String,String> params,BuildContext context) async{
