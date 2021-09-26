@@ -1,0 +1,76 @@
+{
+  "project_info": {
+    "project_number": "585361405756",
+    "project_id": "routes-pay",
+    "storage_bucket": "routes-pay.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:585361405756:android:e2ba7cba84d06caa375039",
+        "android_client_info": {
+          "package_name": "com.routespay.routes_pay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "585361405756-k4polegu6uh1c8fpb3uvb2cumesipl83.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.routespay.routes_pay",
+            "certificate_hash": "44e1186f045f115eac378388d255846aaf41a197"
+          }
+        },
+        {
+          "client_id": "585361405756-eq4h0kfqqound366c8hf0uqtn3ldevqa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtDCYE7ryu3Zo7FXCtAkgzydZ_fXSliBM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "585361405756-eq4h0kfqqound366c8hf0uqtn3ldevqa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:585361405756:android:0c3241a98def1dd9375039",
+        "android_client_info": {
+          "package_name": "com.routespay.routes_pay.routes_pay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "585361405756-eq4h0kfqqound366c8hf0uqtn3ldevqa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtDCYE7ryu3Zo7FXCtAkgzydZ_fXSliBM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "585361405756-eq4h0kfqqound366c8hf0uqtn3ldevqa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

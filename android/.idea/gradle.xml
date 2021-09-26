@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="testRunner" value="GRADLE" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="Embedded JDK" />
+        <option name="modules">
+          <set>
+            <option value="C:/src/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/apple_sign_in_safety-0.0.6/android" />
+            <option value="C:/src/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-3.1.1/android" />
+            <option value="C:/src/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.6.0/android" />
+            <option value="C:/src/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_messaging-10.0.7/android" />
+            <option value="C:/src/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_facebook_auth-3.5.1/android" />
+            <option value="C:/src/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_local_notifications-8.2.0/android" />
+            <option value="C:/src/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in-5.1.0/android" />
+            <option value="C:/src/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.5/android" />
+            <option value="C:/src/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-2.0.8/android" />
+            <option value="C:/src/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/sign_in_with_apple-3.0.0/android" />
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+          </set>
+        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
