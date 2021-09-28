@@ -79,6 +79,10 @@ class _SideNavBarState extends State<SideNavBar> {
                   provider.logoutFacebook();
                   Get.offAll(()=> Login());
 
+                }else if (provider.appleSignedIn!) {
+                  provider.logoutApple();
+                  Get.offAll(()=> Login());
+
                 }
               },
             ),

@@ -1,12 +1,9 @@
-import 'package:apple_sign_in_safety/apple_sign_in.dart';
 import 'package:flutter/material.dart';
+import 'dart:io';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:routes_pay/data/pojo/user.dart';
-import 'package:routes_pay/ui/repository/user_repository.dart';
 import 'package:routes_pay/ui/viewmodel/social_login_controller.dart';
-
 
 class LoginWithSocial extends StatefulWidget {
   static const routeName = "/login-with-social";
@@ -61,21 +58,27 @@ class _LoginWithSocialState extends State<LoginWithSocial> {
                         print('false');
                       }
                     });
+
+
                   }),
               buildLogInButton(
                   'Apple', Colors.black, sizeOfScreen, Colors.black,
                   FontAwesomeIcons.apple, () async {
-                if (await AppleSignIn.isAvailable()) {
-                  try {
-                    final authService = Provider.of<SocialLoginController>(
-                        context, listen: false);
-                    final user = await authService.signInWithApple();
-                    print('uid: ${user!.uid}');
-                  } catch (e) {
-                    // TODO: Show alert here
-                    print(e);
-                  }
-                }
+                 if(Platform.isIOS){
+                   try {
+                     Provider.of<SocialLoginController>(context, listen: false).signInWithApple().then((value) {
+                       if (providerLogin.signedIn) {
+                         Navigator.of(context).popAndPushNamed('/home');
+                       } else {
+                         print('false');
+                       }
+                     });
+                   } catch (e) {
+                     // TODO: Show alert here
+                     print(e);
+                   }
+                 }
+
               }),
               const SizedBox(height: 90,),
               SpinKitCubeGrid(

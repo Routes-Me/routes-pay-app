@@ -118,7 +118,7 @@ class _HomeState extends State<Home> {
           ),
           Spacer(),
 
-           CreditCards(),
+            CreditCards(),
         ],
       ),
     );

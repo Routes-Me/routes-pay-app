@@ -1,4 +1,9 @@
 # See https://www.dartlang.org/guides/libraries/private-files
+README.md
+misc.xml
+.gitignore
+vcs.xml
+modules.xml
 
 # Files and directories created by pub
 .dart_tool/

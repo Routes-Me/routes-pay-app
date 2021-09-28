@@ -115,7 +115,6 @@ class _LoginState extends State<Login> {
                               children: [
                                 TextFormField(
                                   textInputAction: TextInputAction.next,
-                                  autofocus: true,
                                   onFieldSubmitted: (v) {
                                     FocusScope.of(context).requestFocus(focus);
                                   },

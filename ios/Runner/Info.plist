@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key></key>
+	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -18,20 +20,46 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb234769471933118</string>
+				<string>com.googleusercontent.apps.585361405756-76t1e4fkqcj13jg1pjb5kb2mqiul0oso</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>FacebookAppID</key>
+	<string>234769471933118</string>
+	<key>FacebookDisplayName</key>
+	<string>routes-pay2</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>com.routespay.routespay.routesPay</string>
+		<string>com.googleusercontent.apps.337335047637-ciu1dmqo156sdv1idjmm9olljduofdam</string>
+		<string>com-google-gidconsent-google</string>
+		<string>com-google-gidconsent-youtube</string>
+		<string>com-google-gidconsent</string>
+		<string>com.google.gppconsent.2.4.1</string>
+		<string>com.google.gppconsent.2.4.0</string>
+		<string>googlechrome</string>
+		<string>googlechrome-x-callback</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>processing</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

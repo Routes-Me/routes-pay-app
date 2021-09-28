@@ -55,7 +55,7 @@ class _CardsSliderState extends State<CardsSlider> {
     //space
 
     positionY_line1 = widget.height! * 0.1;
-    positionY_line2 = positionY_line1! + Get.height > 720 ?265 : 225;
+    positionY_line2 = positionY_line1! + Get.height > 720 ?275 : 225;
 
     _midleAreaHeight = positionY_line2! - positionY_line1!;
     _outSideCardInterval = 30.0;

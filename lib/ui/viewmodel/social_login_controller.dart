@@ -1,7 +1,7 @@
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
-import 'package:apple_sign_in_safety/apple_sign_in.dart';
-import 'package:apple_sign_in_safety/scope.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -19,8 +19,9 @@ class SocialLoginController extends ChangeNotifier {
   }
 
   final googleSignIn = GoogleSignIn();
-  bool? _isSigningIn;
-  bool signedIn =false;
+  bool? _isSigningIn = false ;
+  bool? appleSignedIn =false ;
+  bool signedIn = false;
 
   googleSignInProvider() {
     _isSigningIn = false;
@@ -34,6 +35,7 @@ class SocialLoginController extends ChangeNotifier {
   }
 
   Future loginWithGoogle([context]) async {
+
     //save type of login
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setInt('type_of_last_login', 1);
@@ -66,6 +68,7 @@ class SocialLoginController extends ChangeNotifier {
         print("name : $nameUser");
         print("email : $emailUser");
         print("image : $imageUserUrl");
+        print(signedIn);
         notifyListeners() ;
 
         //post api login
@@ -162,62 +165,48 @@ class SocialLoginController extends ChangeNotifier {
     Get.back();
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.clear();
+    FirebaseAuth.instance.signOut();
     notifyListeners();
   }
 
 //login with apple
-  final _firebaseAuth = FirebaseAuth.instance;
-
-  Future<User?> signInWithApple({List<Scope> scopes = const []}) async {
-    // 1. perform the sign-in request
-    final result = await AppleSignIn.performRequests(
-        [AppleIdRequest(requestedScopes: scopes)]);
-
-    // 2. check the result
-    switch (result.status) {
-      case AuthorizationStatus.authorized:
-        final appleIdCredential = result.credential;
-        final oAuthProvider = OAuthProvider('apple.com');
-        final credential = oAuthProvider.credential(
-          idToken: String.fromCharCodes(appleIdCredential!.identityToken!),
-          accessToken:
-              String.fromCharCodes(appleIdCredential.authorizationCode!),
-        );
-        final authResult = await _firebaseAuth.signInWithCredential(credential);
-        final firebaseUser = authResult.user;
-
-        if (scopes.contains(Scope.fullName)) {
-          isSigningIn = true;
-
-          //save type of login
-          SharedPreferences preferences = await SharedPreferences.getInstance();
-          preferences.setInt('type_of_last_login', 3);
-          notifyListeners() ;
-
-          nameUser = Scope.fullName as String?;
-          emailUser = Scope.email as String?;
-          //imageUserUrl = Scope.rawValue();
-          final displayName =
-              '${appleIdCredential.fullName!.givenName} ${appleIdCredential.fullName!.familyName}';
-          await firebaseUser!.updateProfile(displayName: displayName);
-        }
-        return firebaseUser;
-      case AuthorizationStatus.error:
-        throw PlatformException(
-          code: 'ERROR_AUTHORIZATION_DENIED',
-          message: result.error.toString(),
-        );
-
-      case AuthorizationStatus.cancelled:
-        throw PlatformException(
-          code: 'ERROR_ABORTED_BY_USER',
-          message: 'Sign in aborted by user',
-        );
-      default:
-        throw UnimplementedError();
-    }
-
+  Future<void> signInWithApple() async {
+    final appleIdCredential =
+    await SignInWithApple.getAppleIDCredential(scopes: [
+      AppleIDAuthorizationScopes.email,
+      AppleIDAuthorizationScopes.fullName,
+    ]);
+    final oAuthProvider = OAuthProvider('apple.com');
+    final credential = oAuthProvider.credential(
+        idToken: appleIdCredential.identityToken,
+        accessToken: appleIdCredential.authorizationCode);
+   try{
+     await FirebaseAuth.instance.signInWithCredential(credential).then((value) {
+       _token = appleIdCredential.identityToken;
+       // uid2 = appleIdCredential.userIdentifier;
+       // _userId = appleIdCredential.userIdentifier;
+       nameUser = appleIdCredential.familyName;
+       emailUser = appleIdCredential.email;
+       isAuth;
+       imageUserUrl = appleIdCredential.state;
+       signedIn=true;
+       appleSignedIn =true ;
+       print('email apple = $emailUser');
+       notifyListeners();
+     });
+   }catch(err){
+     print('err apple login $err');
+   }
   }
+  logoutApple() async {
+    userData = null;
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.clear();
+    FirebaseAuth.instance.signOut();
+    notifyListeners();
+  }
+
+  final _firebaseAuth = FirebaseAuth.instance;
 
   //tryToLogin
   Future tryLogin()async{

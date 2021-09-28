@@ -21,17 +21,21 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    loadSplashScreen();
+    //loadSplashScreen();
     Future.delayed(const Duration(milliseconds: 2600), () {
+      setState(() {
+        done =true;
+      });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final loginStatus = Provider.of<SocialLoginController>(context).signedIn;
+
+
     return done
         ? Consumer<SocialLoginController>(
-            builder: (context, provider, _) => loginStatus ==true
+            builder: (context, provider, _) => provider.signedIn
                 ? Home()
                 :Login() )
         : Container(
@@ -70,7 +74,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   loadSplashScreen() async {
     var _duration = Duration(seconds: splashDelay);
-    //await Provider.of<SocialLoginController>(context,listen: false).tryLogin();
     return Timer(_duration, navigationPage);
   }
 
@@ -79,17 +82,14 @@ class _SplashScreenState extends State<SplashScreen> {
       if(statusLogin){
         Get.off(()=>Home());
       }else{
-        Get.to(()=>Home());
+        Get.to(()=>Login());
       }
-
-
 
     SharedPreferences preferences = await SharedPreferences.getInstance();
     final type = (preferences.getInt('type_of_last_login') != null)
         ? preferences.getInt('type_of_last_login')
         : null;
     print('Type $type');
-    final isLogin = false;
 
     (preferences.getBool('isLogin') == null)
         ? false

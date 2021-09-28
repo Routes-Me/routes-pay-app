@@ -53,12 +53,14 @@ dependencies:
   google_sign_in_web: ^0.10.0+2
   flutter_facebook_auth: ^3.5.1
   flutter_spinkit: ^5.1.0
-  apple_sign_in_safety:
-  sign_in_with_apple: ^3.0.0
+  sign_in_with_apple: ^3.2.0
   get:
   flutter_local_notifications: ^8.2.0
   rxdart: ^0.27.2
   firebase_messaging: ^10.0.7
+
+
+
 
 
 dev_dependencies:
