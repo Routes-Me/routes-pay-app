@@ -8,7 +8,6 @@ import 'package:routes_pay/data/pojo/user.dart';
 import 'package:routes_pay/datasource/api_response.dart';
 import 'package:routes_pay/encrption/aesencryption.dart';
 import 'package:routes_pay/main.dart';
-import 'package:routes_pay/services/notifications.dart';
 import 'package:routes_pay/ui/viewmodel/login_viewmodel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -71,7 +70,6 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    var notificationService = NotificationServiceD();
 
     return Consumer<LoginViewModel>(
         builder: (context, provider, child) => Form(

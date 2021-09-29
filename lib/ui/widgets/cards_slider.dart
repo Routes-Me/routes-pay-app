@@ -19,7 +19,7 @@ class _CreditCardsState extends State<CreditCards> {
     return Align(
         alignment: Alignment.bottomCenter,
         child: Container(
-          height: MediaQuery.of(context).size.height * 0.7,
+          height: MediaQuery.of(context).size.height * 0.7+20,
           color: Color.fromARGB(255, 230, 228, 232),
           child: CardsSlider(
             height: MediaQuery.of(context).size.height * 0.7,
@@ -78,8 +78,13 @@ class _CardsSliderState extends State<CardsSlider> {
       ),
       CardInfo(
         userName: "KHALED SALEH 3",
-        rightColor: Color.fromARGB(255, 22, 22, 111),
-        leftColor: Color.fromARGB(255, 22, 22, 22),
+        rightColor: Color.fromARGB(255, 33, 51, 111),
+        leftColor: Color.fromARGB(255, 22, 51, 75),
+      ),
+      CardInfo(
+        userName: "",
+        rightColor: Colors.white.withOpacity(0),
+        leftColor: Colors.white.withOpacity(0),
       ),
 
     ];
@@ -116,7 +121,30 @@ class _CardsSliderState extends State<CardsSlider> {
       widgetList.add(Positioned(
         //all cards pos h
         top:Get.height >690 ? cardInfo.positionY!  +40 :cardInfo.positionY!  -15 ,
-        child: Transform(
+        child: GestureDetector(
+
+          onTap: (){
+            Get.to(()=>TransactionsScreen(),arguments: {'name':cardInfoList![currentIndexOfCard!].userName});
+          },
+          onVerticalDragUpdate: (DragUpdateDetails d){
+
+            if( currentIndexOfCard! >=cardInfoList!.length-1 ){
+             print('is ++');
+             _updateCardsPosition(d.delta.dy+1);
+            }else if(currentIndexOfCard! <=cardInfoList!.length &&currentIndexOfCard! >= 1 ) {
+              _updateCardsPosition(d.delta.dy);
+            }
+          },
+          onVerticalDragEnd: (DragEndDetails d){
+            scrollOffsetY = (scrollOffsetY!/_midleAreaHeight!).round()*_midleAreaHeight!;
+
+            _updateCardsPosition(0);
+            //changeName();
+
+            print(currentIndexOfCard);
+          },
+
+          child:  Transform(
           transform: Matrix4.identity()
             ..setEntry(3, 2, 0.001)
             ..rotateX(pi / 180 * cardInfo.rotate!)
@@ -183,7 +211,7 @@ class _CardsSliderState extends State<CardsSlider> {
                         ),
                       ))
                 ],
-              ),
+              ),)
             ),
           ),
         ),
@@ -264,26 +292,7 @@ class _CardsSliderState extends State<CardsSlider> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    print(' h ${Get.height}');
-    return GestureDetector(
-      onTap: (){
-        Get.to(()=>TransactionsScreen(),arguments: {'name':cardInfoList![currentIndexOfCard!].userName});
-      },
-      onVerticalDragUpdate: (DragUpdateDetails d){
-          if(currentIndexOfCard! <= cardInfoList!.length){
-            _updateCardsPosition(d.delta.dy);
-          }
-      },
-      onVerticalDragEnd: (DragEndDetails d){
-        scrollOffsetY = (scrollOffsetY!/_midleAreaHeight!).round()*_midleAreaHeight!;
-        if(currentIndexOfCard! <= cardInfoList!.length){
-          _updateCardsPosition(0);
-          changeName();
-        }
-        print(currentIndexOfCard);
-      },
-
-      child: Container(
+    return Container(
         width: MediaQuery.of(context).size.width,
         color: Colors.white,
         child: Stack(
@@ -340,12 +349,12 @@ class _CardsSliderState extends State<CardsSlider> {
                       child: Container(
                         width: screenSize.width*0.3,
                         height: screenSize.height *0.1 -32,
-                        decoration: ShapeDecoration(shadows: const [
+                        decoration: const ShapeDecoration(shadows: [
                           BoxShadow(
-                              color: Color.fromARGB(100, 75, 135, 232),
-                              blurRadius: 10,
-                              offset: Offset(0, 10)),
-                        ], shape: StadiumBorder(), color: Colors.blue.shade800),
+                              color: Color.fromRGBO(36,68,148 ,1),
+                              blurRadius: 8,
+                              offset: Offset(0, 6)),
+                        ], shape: StadiumBorder(), color:Color.fromRGBO(36,68,148 ,1),),
                         child: const Center(
                           child: Text(
                             'Pay Now',
@@ -358,7 +367,9 @@ class _CardsSliderState extends State<CardsSlider> {
                       height: screenSize.height *0.1-16,
                       child: FloatingActionButton(
                         heroTag: 'b',
-                        onPressed: () {},
+                        onPressed: () {setState(() {
+
+                        });},
                         backgroundColor: Colors.white,
                         child: const Icon(
                           Icons.money,
@@ -373,7 +384,7 @@ class _CardsSliderState extends State<CardsSlider> {
             )
           ],
         ),
-      ),
+
     );
   }
 }

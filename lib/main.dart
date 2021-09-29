@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
-import 'package:routes_pay/services/notifications.dart';
 import 'package:routes_pay/ui/auth/login.dart';
 import 'package:routes_pay/ui/auth/other_options_for_login.dart';
 import 'package:routes_pay/ui/auth/renewal_token.dart';
