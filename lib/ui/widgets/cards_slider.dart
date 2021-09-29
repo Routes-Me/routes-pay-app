@@ -78,7 +78,7 @@ class _CardsSliderState extends State<CardsSlider> {
       ),
       CardInfo(
         userName: "KHALED SALEH 3",
-        rightColor: Color.fromARGB(255, 33, 51, 111),
+        rightColor: Color.fromARGB(255, 33, 51, 112),
         leftColor: Color.fromARGB(255, 22, 51, 75),
       ),
       CardInfo(
