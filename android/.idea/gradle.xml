@@ -6,7 +6,6 @@
         <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleJvm" value="Embedded JDK" />
         <option name="modules">
           <set>
             <option value="C:/src/flutter/flutter/.pub-cache/hosted/pub.dartlang.org/apple_sign_in_safety-0.0.6/android" />

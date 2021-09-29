@@ -58,6 +58,7 @@ dependencies:
   flutter_local_notifications: ^8.2.0
   rxdart: ^0.27.2
   firebase_messaging: ^10.0.7
+  swipe_deck: ^1.0.0
 
 
 

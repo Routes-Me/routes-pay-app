@@ -47,7 +47,6 @@ class SocialLoginController extends ChangeNotifier {
       return;
     } else {
       final googleAuth = await googleUser.authentication;
-      signedIn =true;
 
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
@@ -57,7 +56,6 @@ class SocialLoginController extends ChangeNotifier {
       await FirebaseAuth.instance
           .signInWithCredential(credential)
           .then((value)async {
-
 
         _token = googleAuth.idToken;
         uid = googleUser.id;
@@ -69,7 +67,8 @@ class SocialLoginController extends ChangeNotifier {
         print("email : $emailUser");
         print("image : $imageUserUrl");
         print(signedIn);
-        notifyListeners() ;
+        print("access token : ${googleAuth.accessToken}");
+
 
         //post api login
 
@@ -87,6 +86,7 @@ class SocialLoginController extends ChangeNotifier {
           print("Error Response ${e.toString()}");
           /////
         }
+        notifyListeners() ;
 
       });
 
@@ -183,7 +183,6 @@ class SocialLoginController extends ChangeNotifier {
    try{
      await FirebaseAuth.instance.signInWithCredential(credential).then((value) {
        _token = appleIdCredential.identityToken;
-       // uid2 = appleIdCredential.userIdentifier;
        // _userId = appleIdCredential.userIdentifier;
        nameUser = appleIdCredential.familyName;
        emailUser = appleIdCredential.email;
