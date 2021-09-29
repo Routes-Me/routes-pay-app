@@ -4,6 +4,7 @@ misc.xml
 .gitignore
 vcs.xml
 modules.xml
+*.iml
 
 # Files and directories created by pub
 .dart_tool/
