@@ -19,7 +19,7 @@ class _CreditCardsState extends State<CreditCards> {
     return Align(
         alignment: Alignment.bottomCenter,
         child: Container(
-          height: MediaQuery.of(context).size.height * 0.7+20,
+          height: MediaQuery.of(context).size.height * 0.7+50,
           color: Color.fromARGB(255, 230, 228, 232),
           child: CardsSlider(
             height: MediaQuery.of(context).size.height * 0.7,
@@ -55,7 +55,7 @@ class _CardsSliderState extends State<CardsSlider> {
     //space
 
     positionY_line1 = widget.height! * 0.1;
-    positionY_line2 = positionY_line1! + Get.height > 720 ?275 : 225;
+    positionY_line2 = positionY_line1! + Get.height > 720 ?285 : 225;
 
     _midleAreaHeight = positionY_line2! - positionY_line1!;
     _outSideCardInterval = 30.0;
@@ -173,7 +173,7 @@ class _CardsSliderState extends State<CardsSlider> {
                     top: 120,
                     left: 20,
                     child: Text(
-                      '4423',
+                      '442322',
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w700,
@@ -285,7 +285,6 @@ class _CardsSliderState extends State<CardsSlider> {
     }
 
     setState(() {
-
     });
   }
 
@@ -374,7 +373,7 @@ class _CardsSliderState extends State<CardsSlider> {
                         child: const Icon(
                           Icons.money,
                           size: 34,
-                          color: Colors.grey,
+                          color: Colors.blue,
                         ),
                       ),
                     ),
