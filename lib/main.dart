@@ -31,8 +31,40 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
           channel.id,
           channel.name,
           channel.description,
-        ),
-      ));
+        ),iOS: IOSNotificationDetails(),
+      ),);
+}
+//request permitions
+requestPermssion()async{
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+  NotificationSettings settings = await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+
+  if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+    print('User granted permission');
+  } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
+    print('User granted provisional permission');
+  } else {
+    print('User declined or has not accepted permission');
+  }
+}
+
+//initial message
+Future<void> initialMessage() async {
+  var message = await FirebaseMessaging.instance.getInitialMessage();
+
+  if(message != null){
+    print('init message Ok');
+  }
+
 }
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -91,7 +123,10 @@ class _RoutesState extends State<Routes> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    initialMessage();
+    requestPermssion();
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print(message.notification!.body);
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
       if (notification != null && android != null) {
@@ -119,21 +154,10 @@ class _RoutesState extends State<Routes> {
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
       if (notification != null && android != null) {
-        showDialog(
-            context: context,
-            builder: (_) {
-              return AlertDialog(
-                title: Text(notification.title!),
-                content: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [Text(notification.body!)],
-                  ),
-                ),
-              );
-            });
+        print('message onOpen Ok');
       }
     });
+
   }
   //send a message
   void showNotification()async {

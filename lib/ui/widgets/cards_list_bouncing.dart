@@ -9,71 +9,74 @@ class CardsListB extends StatefulWidget {
 
 class _CardsListBState extends State<CardsListB> {
   void getPostsData() {
-    List<dynamic>? responseList;
+    List<dynamic> responseList = Category_Ahkam;
     List<Widget> listItems = [];
-    responseList!.forEach((post) {
-      listItems.add(InkWell(
-        onTap: () {
-          if(post['id'] ==8) {
-            print('object');
+    responseList.forEach((post) {
+      listItems.add(Column(
+        children: [
+          InkWell(
+            onTap: () {
+              if(post['id'] ==8) {
+                print('object');
+              }else if (post['id'] ==7){
+                print('object');
 
-          }else if (post['id'] ==7){
-            print('object');
+              }
+              else if (post['id'] ==9){
+                print('object');
 
+              }else{
 
-          }
-          else if (post['id'] ==9){
-            print('object');
-
-          }else{
-
-          }
-        },
-        child: Container(
-            height: 350,
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.black.withAlpha(100), blurRadius: 10.0),
-                ]),
-            child: Padding(
-              padding:
-              const EdgeInsets.symmetric(horizontal: 20.0, vertical: 22),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
+              }
+            },
+            child: Container(
+                height: 550,
+                margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black.withAlpha(100), blurRadius: 10.0),
+                    ]),
+                child: Padding(
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 22),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text(
-                        post["name"],
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: const TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Montserrat-Arabic Regular'),
+
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: <Widget>[
+                          Text(
+                            post["name"],
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style: const TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Montserrat-Arabic Regular'),
+                          ),
+                          Spacer(),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            " ${post["count"].toString()}",
+                            style: const TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          )
+                        ],
                       ),
-                      Spacer(),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        " ${post["count"].toString()}",
-                        style: const TextStyle(
-                            fontSize: 16,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold),
-                      )
                     ],
                   ),
-                ],
-              ),
-            )),
+                )),
+          ),
+          //SizedBox(height: 400,)
+        ],
       ));
     });
     setState(() {
@@ -119,7 +122,7 @@ class _CardsListBState extends State<CardsListB> {
                     if (topContainer > 0.5) {
                       scale = index + 0.5 - topContainer;
                       if (scale < 0) {
-                        scale = 0;
+                        scale = 1;
                       } else if (scale > 1) {
                         scale = 1;
                       }
@@ -141,3 +144,15 @@ class _CardsListBState extends State<CardsListB> {
     );
   }
 }
+const Category_Ahkam = [
+  {
+    'id': 0,
+    "name": "Card Name 1",
+    "brand": "Hawkers",
+    "count": 25,
+    "image": "ahkam1.png",
+  },
+
+
+
+];
