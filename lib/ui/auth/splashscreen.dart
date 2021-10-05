@@ -27,15 +27,12 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<SocialLoginController>(context);
     return done
-        ? Consumer<SocialLoginController>(
-            builder: (context, provider, _) => provider.signedIn == true
-                ? Home()
-                : FutureBuilder(
-                    future: provider.tryLogin(),
-                    builder: (context, data) =>
-                        Login()),
-          )
+        ? FutureBuilder(
+        future: provider.tryLogin(),
+        builder: (context, data) => provider.signedIn ? Home():
+            Login())
         : Scaffold(
             body: Container(
               width: double.infinity,

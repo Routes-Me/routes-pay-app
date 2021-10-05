@@ -109,7 +109,7 @@ class _RoutesState extends State<Routes> {
     requestPermssion();
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       print(message.notification!.body);
-      LocalNotificationService.display(message);
+      //LocalNotificationService.display(message);
     });
 
     ///on open app but in background NOT TERMINATE
@@ -162,7 +162,7 @@ class _RoutesState extends State<Routes> {
               ))),
       initialRoute: '/',
       routes: {
-        "/": (context) => Home(),
+        "/": (context) => SplashScreen(),
         "/login": (context) => Login(),
         "/signup": (context) => Signup(),
         "/home": (context) => Home(),
