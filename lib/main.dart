@@ -1,43 +1,33 @@
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
+import 'package:routes_pay/services/notifications.dart';
 import 'package:routes_pay/ui/auth/login.dart';
 import 'package:routes_pay/ui/auth/other_options_for_login.dart';
 import 'package:routes_pay/ui/auth/renewal_token.dart';
 import 'package:routes_pay/ui/auth/signup.dart';
 import 'package:routes_pay/ui/auth/splashscreen.dart';
 import 'package:routes_pay/ui/home/home.dart';
-import 'package:routes_pay/ui/viewmodel/cards_model.dart';
+import 'package:routes_pay/controller/cards_controller.dart';
 import 'package:routes_pay/ui/viewmodel/login_viewmodel.dart';
 import 'package:routes_pay/ui/viewmodel/register_viewmodel.dart';
-import 'package:routes_pay/ui/viewmodel/social_login_controller.dart';
+import 'package:routes_pay/controller/social_login_controller.dart';
 
 import 'locator.dart';
 
+///on background
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   print('Handling a background message ${message.messageId}');
   print(message.data);
-  flutterLocalNotificationsPlugin.show(
-      message.data.hashCode,
-      message.data['title'],
-      message.data['body'],
-      NotificationDetails(
-        android: AndroidNotificationDetails(
-          channel.id,
-          channel.name,
-          channel.description,
-        ),iOS: IOSNotificationDetails(),
-      ),);
 }
 //request permitions
 requestPermssion()async{
   FirebaseMessaging messaging = FirebaseMessaging.instance;
-
   NotificationSettings settings = await messaging.requestPermission(
     alert: true,
     announcement: false,
@@ -57,34 +47,24 @@ requestPermssion()async{
   }
 }
 
-//initial message
+/// initial message from terminate
 Future<void> initialMessage() async {
-  var message = await FirebaseMessaging.instance.getInitialMessage();
+   await FirebaseMessaging.instance.getInitialMessage().then((message) {
+    if(message !=null){
+      print('init message Ok ,terminate');
 
-  if(message != null){
-    print('init message Ok');
-  }
+    }
+  });
+
 
 }
-
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-FlutterLocalNotificationsPlugin();
-const AndroidNotificationChannel channel = AndroidNotificationChannel(
-    'high_importance_channel', // id
-    'High Importance Notifications', // title
-    'This channel is used for important notifications.', // description
-    importance: Importance.high,
-    playSound: true);
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-  await flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
-      ?.createNotificationChannel(channel);
+
 
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
@@ -123,54 +103,28 @@ class _RoutesState extends State<Routes> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    LocalNotificationService.initialize(context);
+
     initialMessage();
     requestPermssion();
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       print(message.notification!.body);
-      RemoteNotification? notification = message.notification;
-      AndroidNotification? android = message.notification?.android;
-      if (notification != null && android != null) {
-        flutterLocalNotificationsPlugin.show(
-            notification.hashCode,
-            notification.title,
-            notification.body,
-            NotificationDetails(
-              android: AndroidNotificationDetails(
-                channel.id,
-                channel.name,
-                channel.description,
-                color: Colors.blue,
-                playSound: true,
-                icon: '@mipmap/ic_launcher',
-
-              ),iOS: IOSNotificationDetails()
-            ),
-        );
-      }
+      LocalNotificationService.display(message);
     });
 
+    ///on open app but in background NOT TERMINATE
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       print('A new onMessageOpenedApp event was published!');
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
+      final routeFromMessage = message.data['route'];
+      print('route from message $routeFromMessage');
+      print(routeFromMessage);
       if (notification != null && android != null) {
         print('message onOpen Ok');
       }
     });
 
-  }
-  //send a message
-  void showNotification()async {
-    flutterLocalNotificationsPlugin.show(
-        0,
-        "Testing ",
-        "How you doin ?",
-        NotificationDetails(
-            android: AndroidNotificationDetails(channel.id, channel.name, channel.description,
-                importance: Importance.high,
-                color: Colors.blue,
-                playSound: true,
-                icon: '@mipmap/ic_launcher')));
   }
 
   @override
@@ -208,7 +162,7 @@ class _RoutesState extends State<Routes> {
               ))),
       initialRoute: '/',
       routes: {
-        "/": (context) => SplashScreen(),
+        "/": (context) => Home(),
         "/login": (context) => Login(),
         "/signup": (context) => Signup(),
         "/home": (context) => Home(),

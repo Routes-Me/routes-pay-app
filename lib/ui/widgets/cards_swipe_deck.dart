@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:routes_pay/ui/viewmodel/cards_model.dart';
+import 'package:routes_pay/controller/cards_controller.dart';
 import 'package:routes_pay/ui/widgets/cards_slider.dart';
 import 'package:swipe_deck/swipe_deck.dart';
 

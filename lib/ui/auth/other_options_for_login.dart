@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:routes_pay/ui/viewmodel/social_login_controller.dart';
+import 'package:routes_pay/controller/social_login_controller.dart';
 
 class LoginWithSocial extends StatefulWidget {
   static const routeName = "/login-with-social";

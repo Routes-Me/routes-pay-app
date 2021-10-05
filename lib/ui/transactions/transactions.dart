@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:routes_pay/constants/app_textstyle.dart';
 import 'package:routes_pay/constants/color_constants.dart';
 import 'package:routes_pay/data/transaction_data.dart';
+import 'package:routes_pay/ui/home/home.dart';
 import 'package:routes_pay/ui/transactions/transaction_card.dart';
 
 class TransactionsScreen extends StatelessWidget {
@@ -21,7 +22,7 @@ class TransactionsScreen extends StatelessWidget {
               fontSize: 28
           ),
         ),
-        leading: IconButton(onPressed: ()=>Get.back(), icon:Icon(Icons.arrow_back,color: Colors.black,)),
+        leading: IconButton(onPressed: ()=>Get.off(()=>Home()), icon:Icon(Icons.arrow_back,color: Colors.black,)),
 
         // actions: [
         //   IconButton(

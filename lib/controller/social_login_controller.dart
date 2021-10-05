@@ -50,6 +50,7 @@ class SocialLoginController extends ChangeNotifier {
         idToken: googleAuth.idToken,
       );
       signedIn =true;
+
       await FirebaseAuth.instance
           .signInWithCredential(credential)
           .then((value)async {
@@ -86,8 +87,6 @@ class SocialLoginController extends ChangeNotifier {
         notifyListeners() ;
 
       });
-
-      //isSigningIn = false;
     }
   }
 
@@ -121,6 +120,8 @@ class SocialLoginController extends ChangeNotifier {
       permissions: ["public_profile", "email"],
     );
 
+
+     //await FirebaseAuth.instance.signInWithCredential(result.accessToken);
     // check the status of our login
     if (result.status == LoginStatus.success) {
       isSigningIn = true;
@@ -148,7 +149,6 @@ class SocialLoginController extends ChangeNotifier {
       notifyListeners();
     } else {
       print(result.message);
-
       print(result.status);
     }
     notifyListeners() ;
@@ -202,13 +202,11 @@ class SocialLoginController extends ChangeNotifier {
     notifyListeners();
   }
 
-  final _firebaseAuth = FirebaseAuth.instance;
-
   //tryToLogin
   Future tryLogin()async{
   SharedPreferences preferences = await SharedPreferences.getInstance();
   final type =  (preferences.getInt('type_of_last_login') !=null) ?  preferences.getInt('type_of_last_login'):null;
-  if(type ==1){
+  if(type ==1 && !signedIn ){
     loginWithGoogle();
   }else if(type ==2){
     //loginWithFacebook();

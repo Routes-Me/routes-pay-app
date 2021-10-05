@@ -1,13 +1,11 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:provider/provider.dart';
 import 'package:routes_pay/data/pojo/user.dart';
 import 'package:routes_pay/datasource/api_response.dart';
 import 'package:routes_pay/encrption/aesencryption.dart';
-import 'package:routes_pay/main.dart';
 import 'package:routes_pay/ui/viewmodel/login_viewmodel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -34,7 +32,7 @@ class _LoginState extends State<Login> {
   getToken() async {
     token = await FirebaseMessaging.instance.getToken();
       token = token;
-    print('Token : $token');
+    print('messaging Token : $token');
   }
 
   @override
