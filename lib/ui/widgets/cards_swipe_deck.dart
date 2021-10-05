@@ -18,7 +18,7 @@ class _CardsSwipeDeckState extends State<CardsSwipeDeck> {
   CardInfo(
   userName: "KHALED SALEH",
   rightColor: Color.fromARGB(255, 85, 137, 234),
-  leftColor: Color.fromARGB(255, 85, 137, 234),
+  leftColor: Color.fromARGB(215, 45, 137, 214),
   ),
   CardInfo(
   userName: "KHALED SALEH 1",

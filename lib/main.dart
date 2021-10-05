@@ -143,7 +143,7 @@ class _RoutesState extends State<Routes> {
                 playSound: true,
                 icon: '@mipmap/ic_launcher',
 
-              ),iOS: IOSNotificationDetails()
+              ),iOS: IOSNotificationDetails(presentAlert: true,presentSound: true,)
             ),
         );
       }
