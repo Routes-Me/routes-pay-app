@@ -1,13 +1,11 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:provider/provider.dart';
 import 'package:routes_pay/data/pojo/user.dart';
 import 'package:routes_pay/datasource/api_response.dart';
 import 'package:routes_pay/encrption/aesencryption.dart';
-import 'package:routes_pay/main.dart';
 import 'package:routes_pay/ui/viewmodel/login_viewmodel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -28,38 +26,13 @@ class _LoginState extends State<Login> {
   @override
   void initState() {
     super.initState();
-    var initialzationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
-    var initializationSettings =
-        InitializationSettings(android: initialzationSettingsAndroid);
-
-    //flutterLocalNotificationsPlugin.initialize(initializationSettings);
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      RemoteNotification? notification = message.notification;
-      AndroidNotification? android = message.notification?.android;
-      if (notification != null && android != null) {
-        flutterLocalNotificationsPlugin.show(
-            notification.hashCode,
-            notification.title,
-            notification.body,
-            NotificationDetails(
-              android: AndroidNotificationDetails(
-                channel.id,
-                channel.name,
-                channel.description,
-                icon: android.smallIcon,
-              ),
-            ));
-      }
-    });
     getToken();
   }
-
   String? token;
   getToken() async {
     token = await FirebaseMessaging.instance.getToken();
-    token = token;
-    print('Token : $token');
+      token = token;
+    print('messaging Token : $token');
   }
 
   @override
@@ -71,6 +44,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+
     return Consumer<LoginViewModel>(
         builder: (context, provider, child) => Form(
               key: validateForm,
@@ -128,11 +102,10 @@ class _LoginState extends State<Login> {
                                       fillColor: Colors.orange[50],
                                       hintStyle:
                                           TextStyle(color: Colors.grey[500]),
-                                      contentPadding:
-                                          const EdgeInsets.all(10.0),
+                                      contentPadding: const EdgeInsets.all(10.0),
                                       focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: Colors.white),
+                                        borderSide:
+                                            const BorderSide(color: Colors.white),
                                         borderRadius:
                                             BorderRadius.circular(10.0),
                                       ),
@@ -146,8 +119,8 @@ class _LoginState extends State<Login> {
                                       errorBorder: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(10),
-                                          borderSide: const BorderSide(
-                                              color: Colors.red))),
+                                          borderSide:
+                                              const BorderSide(color: Colors.red))),
                                 ),
                                 const SizedBox(
                                   height: 10,
@@ -172,11 +145,10 @@ class _LoginState extends State<Login> {
                                       fillColor: Colors.orange[50],
                                       hintStyle:
                                           TextStyle(color: Colors.grey[500]),
-                                      contentPadding:
-                                          const EdgeInsets.all(10.0),
+                                      contentPadding: const EdgeInsets.all(10.0),
                                       focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: Colors.white),
+                                        borderSide:
+                                            const BorderSide(color: Colors.white),
                                         borderRadius:
                                             BorderRadius.circular(10.0),
                                       ),
@@ -220,7 +192,7 @@ class _LoginState extends State<Login> {
                                                         passwordController.text)
                                               };
                                               /////
-                                              provider.setState(
+                                               provider.setState(
                                                   ApiResponse.loading(""));
                                               await provider.signIn(
                                                   params, context);
@@ -251,15 +223,14 @@ class _LoginState extends State<Login> {
                                                               'Login Successful')));
                                                   break;
                                                 case Status.ERROR:
-                                                  return;
+                                                  return  ;
                                                 case Status.INITIAL:
-                                                  return;
+                                                  return ;
                                                 default:
                                                   ScaffoldMessenger.of(context)
-                                                      /////
+                                                  /////
                                                       .showSnackBar(const SnackBar(
-                                                          content: Text(
-                                                              "provider.response!.message")));
+                                                          content: Text("provider.response!.message")));
                                               }
                                             }
                                           },
@@ -404,4 +375,6 @@ class _LoginState extends State<Login> {
               ),
             ));
   }
+
+
 }

@@ -8,29 +8,31 @@ class CardsListB extends StatefulWidget {
 }
 
 class _CardsListBState extends State<CardsListB> {
-  void getPostsData() {
-    List<dynamic> responseList = Category_Ahkam;
+  void getCardsData() {
+    double heightContainer = 420;
+    List<dynamic> responseList = cards_info;
     List<Widget> listItems = [];
-    responseList.forEach((post) {
+    responseList.forEach((card) {
       listItems.add(Column(
         children: [
           InkWell(
             onTap: () {
-              if(post['id'] ==8) {
-                print('object');
-              }else if (post['id'] ==7){
-                print('object');
-
+              if(card['id'] ==0) {
+                setState(() {
+                  heightContainer = 100;
+                });
+                print('object1');
+              }else if (card['id'] ==1){
+                print('object2');
               }
-              else if (post['id'] ==9){
-                print('object');
-
+              else if (card['id'] ==2){
+                print('object3');
               }else{
 
               }
             },
-            child: Container(
-                height: 550,
+            child: AnimatedContainer(
+                height: heightContainer,
                 margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
@@ -39,6 +41,7 @@ class _CardsListBState extends State<CardsListB> {
                       BoxShadow(
                           color: Colors.black.withAlpha(100), blurRadius: 10.0),
                     ]),
+                duration: Duration(milliseconds: 500),
                 child: Padding(
                   padding:
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 22),
@@ -50,7 +53,7 @@ class _CardsListBState extends State<CardsListB> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
                           Text(
-                            post["name"],
+                            card["name"],
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                             style: const TextStyle(
@@ -63,7 +66,7 @@ class _CardsListBState extends State<CardsListB> {
                             height: 10,
                           ),
                           Text(
-                            " ${post["count"].toString()}",
+                            " ${card["count"].toString()}",
                             style: const TextStyle(
                                 fontSize: 16,
                                 color: Colors.black,
@@ -93,9 +96,9 @@ class _CardsListBState extends State<CardsListB> {
   @override
   void initState() {
     super.initState();
-    getPostsData();
+    getCardsData();
     controller.addListener(() {
-      double value = controller.offset / 320;
+      double value = controller.offset / 119;
 
       setState(() {
         topContainer = value;
@@ -105,46 +108,48 @@ class _CardsListBState extends State<CardsListB> {
   }
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: <Widget>[
+    return Scaffold(
+      body: Container(
+        child: Column(
+          children: <Widget>[
 
-          const SizedBox(
-            height: 10,
-          ),
-          Expanded(
-              child: ListView.builder(
-                  controller: controller,
-                  itemCount: itemsData.length,
-                  physics: BouncingScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    double scale = 1.0;
-                    if (topContainer > 0.5) {
-                      scale = index + 0.5 - topContainer;
-                      if (scale < 0) {
-                        scale = 1;
-                      } else if (scale > 1) {
-                        scale = 1;
+            const SizedBox(
+              height: 50,
+            ),
+            Expanded(
+                child: ListView.builder(
+                    controller: controller,
+                    itemCount: itemsData.length,
+                    physics: BouncingScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      double scale = 1.0;
+                      if (topContainer > 0.5) {
+                        scale = index + 0.5 - topContainer;
+                        if (scale < 0) {
+                          scale = 0;
+                        } else if (scale > 1) {
+                          scale = 1;
+                        }
                       }
-                    }
-                    return Opacity(
-                      opacity: scale,
-                      child: Transform(
-                        transform: Matrix4.identity()..scale(scale, scale),
-                        alignment: Alignment.bottomCenter,
-                        child: Align(
-                            heightFactor: 0.9,
-                            alignment: Alignment.topCenter,
-                            child: itemsData[index]),
-                      ),
-                    );
-                  })),
-        ],
+                      return Opacity(
+                        opacity: scale,
+                        child: Transform(
+                          transform: Matrix4.identity()..scale(scale, scale),
+                          alignment: Alignment.bottomCenter,
+                          child: Align(
+                              heightFactor:0.5,
+                              alignment: Alignment.topCenter,
+                              child: itemsData[index]),
+                        ),
+                      );
+                    })),
+          ],
+        ),
       ),
     );
   }
 }
-const Category_Ahkam = [
+const cards_info = [
   {
     'id': 0,
     "name": "Card Name 1",
@@ -152,6 +157,28 @@ const Category_Ahkam = [
     "count": 25,
     "image": "ahkam1.png",
   },
+  {
+    'id': 1,
+    "name": "Card Name 2",
+    "brand": "Hawkers",
+    "count": 25,
+    "image": "ahkam1.png",
+  },
+  {
+    'id': 2,
+    "name": "Card Name 3",
+    "brand": "Hawkers",
+    "count": 25,
+    "image": "ahkam1.png",
+  },
+  {
+    'id': 2,
+    "name": "Card Name 3",
+    "brand": "Hawkers",
+    "count": 25,
+    "image": "ahkam1.png",
+  },
+
 
 
 

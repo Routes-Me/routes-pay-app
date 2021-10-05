@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:provider/provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:routes_pay/ui/transactions/transactions.dart';
-import 'package:routes_pay/ui/viewmodel/cards_model.dart';
+import 'package:routes_pay/controller/cards_controller.dart';
 
 class CreditCards extends StatefulWidget {
   const CreditCards({Key? key}) : super(key: key);
@@ -65,6 +65,7 @@ class _CardsSliderState extends State<CardsSlider> {
         userName: "KHALED SALEH",
         rightColor: Color.fromARGB(255, 85, 137, 234),
         leftColor: Color.fromARGB(255, 85, 137, 234),
+
       ),
       CardInfo(
         userName: "KHALED SALEH 1",

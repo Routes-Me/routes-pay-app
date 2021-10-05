@@ -1,14 +1,11 @@
 import 'dart:async';
-import 'package:get/get.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:routes_pay/ui/auth/login.dart';
 import 'package:routes_pay/ui/home/home.dart';
-import 'package:routes_pay/ui/widgets/cards_swipe_deck.dart';
-import 'package:routes_pay/ui/viewmodel/social_login_controller.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:routes_pay/controller/social_login_controller.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -16,13 +13,11 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  final splashDelay = 3;
   bool done = false;
 
   @override
   void initState() {
     super.initState();
-    //loadSplashScreen();
     Future.delayed(const Duration(milliseconds: 2800), () {
       setState(() {
         done = true;

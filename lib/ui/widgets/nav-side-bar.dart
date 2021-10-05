@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:routes_pay/ui/auth/login.dart';
-import 'package:routes_pay/ui/viewmodel/social_login_controller.dart';
+import 'package:routes_pay/controller/social_login_controller.dart';
 
 class SideNavBar extends StatefulWidget {
   const SideNavBar({Key? key}) : super(key: key);
