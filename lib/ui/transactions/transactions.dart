@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:routes_pay/constants/app_textstyle.dart';
 import 'package:routes_pay/constants/color_constants.dart';
 import 'package:routes_pay/data/transaction_data.dart';
+import 'package:routes_pay/models/shake_transition.dart';
 import 'package:routes_pay/ui/home/home.dart';
 import 'package:routes_pay/ui/transactions/transaction_card.dart';
 
@@ -22,7 +23,7 @@ class TransactionsScreen extends StatelessWidget {
               fontSize: 28
           ),
         ),
-        leading: IconButton(onPressed: ()=>Get.off(()=>Home()), icon:Icon(Icons.arrow_back,color: Colors.black,)),
+        leading: IconButton(onPressed: ()=>Get.back(), icon:Icon(Icons.arrow_back,color: Colors.black,)),
 
         // actions: [
         //   IconButton(
@@ -44,10 +45,14 @@ class TransactionsScreen extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              const Text(
-                "Recent Transactions",
-                style: ApptextStyle.BODY_TEXT,
+              ShakeTransition(
+                duration: Duration(seconds: 2),
+
+                child: Text(
+                  "Recent Transactions",
+                  style: ApptextStyle.BODY_TEXT,
               ),
+               ),
               const SizedBox(
                 height: 15,
               ),
@@ -61,7 +66,11 @@ class TransactionsScreen extends StatelessWidget {
                     );
                   },
                   itemBuilder: (context, index) {
-                    return TransactionCard(transaction: myTransactions[index]);
+                    return ShakeTransition(
+                        axis: Axis.vertical,
+                        offest: index.toDouble()*40,
+                        duration: Duration(seconds: index),
+                        child: TransactionCard(transaction: myTransactions[index]));
                   })
             ],
           ),

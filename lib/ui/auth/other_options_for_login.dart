@@ -40,7 +40,7 @@ class _LoginWithSocialState extends State<LoginWithSocial> {
                 Provider.of<SocialLoginController>(context, listen: false)
                     .loginWithGoogle(context)
                     .then((value) async {
-                  if (providerLogin.isSigningIn) {
+                  if (providerLogin.isSigningInGoogle) {
                     Navigator.of(context).popAndPushNamed('/home');
                   } else {
                     print('false');

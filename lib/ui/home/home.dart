@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:routes_pay/models/card_info_model.dart';
+import 'package:routes_pay/models/shake_transition.dart';
 import 'package:routes_pay/ui/transactions/transactions.dart';
 import 'package:routes_pay/ui/widgets/nav-side-bar.dart';
+import 'package:screen_brightness/screen_brightness.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -29,6 +31,8 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
+    setBrightness(0.9);
+
     if (Get.height < 730) {
       pos = [0.0, 340.0, 415.0, 505.0, 615.0];
     }
@@ -81,13 +85,22 @@ class _HomeState extends State<Home> {
   }
 
   String? token;
-
   getToken() async {
     token = await FirebaseMessaging.instance.getToken();
     setState(() {
       token = token;
     });
     print('Token : $token');
+  }
+
+//setBrightness
+  Future<void> setBrightness(double brightness) async {
+    try {
+      await ScreenBrightness.setScreenBrightness(brightness);
+    } catch (e) {
+      print(e);
+      throw 'Failed to set brightness';
+    }
   }
 
   _buildCards() {
@@ -97,167 +110,187 @@ class _HomeState extends State<Home> {
         AnimatedPositioned(
           top: pos[i],
           duration: Duration(milliseconds: 500),
-          child: SizedBox(
-              height: Get.height * 0.6 - 50,
-              width: Get.width - 25,
-              child: Card(
-                elevation: 9,
-                color: Colors.white.withOpacity(0.0),
-                child: Dismissible(
-                  background: ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                    child: FadeInImage.assetNetwork(
-                      imageScale: 1,
-                        height: Get.height * 0.6 - 50,
-                        fit: BoxFit.fill,
-                        placeholder:'assets/images/routes_background.png'
-                        , image: 'https://firebasestorage.googleapis.com/v0/b/routes-pay.appspot.com/o/routes_background.jpg?alt=media&token=c978d6d9-5f96-4c09-aa33-6159c3b2ea43'),
-                  ),
-                  direction: DismissDirection.endToStart,
+          child: ShakeTransition(
+            duration: Duration(seconds: i*2),
+            offest: i.toDouble()*90,
+            axis: Axis.vertical,
+            child: SizedBox(
+                height: Get.height * 0.6 - 50,
+                width: Get.width - 25,
+                child: Card(
+                  elevation: 9,
+                  color: Colors.white.withOpacity(0.0),
+                  child: Dismissible(
+                    background: ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: FadeInImage.assetNetwork(
+                        imageScale: 1,
+                          height: Get.height * 0.6 - 50,
+                          fit: BoxFit.fill,
+                          placeholder:'assets/images/routes_background.png'
+                          , image: 'https://firebasestorage.googleapis.com/v0/b/routes-pay.appspot.com/o/routes_background.jpg?alt=media&token=c978d6d9-5f96-4c09-aa33-6159c3b2ea43'),
+                    ),
+                    direction: DismissDirection.endToStart,
 
-                  onDismissed: (dir) {
-                    Get.offAll(() => TransactionsScreen(),
-                        arguments: {
-                          'name': cardInfoList![i].userName
-                        });
-                  },
-                  key: ValueKey(cardInfoList![i]),
-                  child: InkWell(
-                    onTap: () {
-                      setState(() {
-                        if (i == 0) {
-                          pos = [3.0, 460.0, 560.0, 660.0, 760.0];
-                        } else {
-                          pos = [480.0, 580.0, 680.0, 780.0, 880.0];
-                        }
-                        pos[i] = 5.0 * i;
-                        controller!.position.jumpTo(0.0);
-                      });
-
-                      if (i == indexOfCardOpen) {
-                        tapsCount++;
-                        setState(() {
-                          pos = [5.0, 100.0, 200.0, 300.0, 400.0];
-                        });
-                        visibleCard = false;
-                        print(tapsCount);
-                      } else {
-                        tapsCount = 0;
-                      }
-                      if (tapsCount > 1) {
+                    onDismissed: (dir) {
+                      Get.offAll(() => TransactionsScreen(),
+                          arguments: {
+                            'name': cardInfoList![i].userName
+                          });
+                    },
+                    key: ValueKey(cardInfoList![i]),
+                    child: InkWell(
+                      onTap: () {
                         setState(() {
                           if (i == 0) {
-                            pos = [5.0, 460.0, 560.0, 660.0, 760.0];
+                            setBrightness(1.0);
+
+                            pos = [3.0, 460.0, 560.0, 660.0, 760.0];
                           } else {
-                            pos = [460.0, 560.0, 660.0, 760.0, 860.0];
+                            setBrightness(1.0);
+
+                            pos = [480.0, 580.0, 680.0, 780.0, 880.0];
                           }
                           pos[i] = 5.0 * i;
                           controller!.position.jumpTo(0.0);
-                          tapsCount = 0;
                         });
-                      }
-                      indexOfCardOpen = i;
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            begin: Alignment.centerRight,
-                            end: Alignment.centerLeft,
-                            colors: [
-                              cardInfoList![i].rightColor!,
-                              cardInfoList![i].leftColor!
-                            ]),
-                        border: Border.all(width: 0.9),
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(18.0),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  '${cardInfoList![i].userName.toString()}',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 20),
-                                ),
-                                Column(
-                                  children: [
 
-                                    Text(
-                                      '${cardInfoList![i].cardBalance!.toStringAsFixed(3)} KD',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 22),
-                                    ),
-                                    Text(
-                                      'Expire at : ${cardInfoList![i].expireDate!.toString()}',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 14),
-                                    ),
-                                  ],
-                                )
-                              ],
+                        if (i == indexOfCardOpen) {
+                          Get.to(() => TransactionsScreen(),
+                              arguments: {
+                                'name': cardInfoList![i].userName
+                              });
+                          // tapsCount++;
+                          // setBrightness(0.6);
+                          // setState(() {
+                          //   pos = [5.0, 100.0, 200.0, 300.0, 400.0];
+                          // });
+                          // visibleCard = false;
+                          // print(tapsCount);
+                          // print('back');
+
+                        } else {
+                          tapsCount = 0;
+                        }
+                        if (tapsCount > 1) {
+
+                          setState(() {
+                            if (i == 0) {
+                              setBrightness(1.0);
+
+                              pos = [5.0, 460.0, 560.0, 660.0, 760.0];
+                            } else {
+                              setBrightness(1.0);
+                              pos = [460.0, 560.0, 660.0, 760.0, 860.0];
+                            }
+                            pos[i] = 5.0 * i;
+                            controller!.position.jumpTo(0.0);
+                            tapsCount = 0;
+                          });
+                        }
+                        indexOfCardOpen = i;
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                              begin: Alignment.centerRight,
+                              end: Alignment.centerLeft,
+                              colors: [
+                                cardInfoList![i].rightColor!,
+                                cardInfoList![i].leftColor!
+                              ]),
+                          border: Border.all(width: 0.9),
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(18.0),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    '${cardInfoList![i].userName.toString()}',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  ),
+                                  Column(
+                                    children: [
+
+                                      Text(
+                                        '${cardInfoList![i].cardBalance!.toStringAsFixed(3)} KD',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 22),
+                                      ),
+                                      Text(
+                                        'Expire at : ${cardInfoList![i].expireDate!.toString()}',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 14),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                          SizedBox(height: Get.height * 0.1 - 50),
-                          Padding(
-                            padding: const EdgeInsets.all(18.0),
-                            child: Row(
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Buses Names :',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                    SizedBox(
-                                      height: 6,
-                                    ),
-                                    Text(
-                                      '${cardInfoList![i].busesNames.toString()}',
-                                      style: TextStyle(
-                                          fontSize: 22,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    )
-                                  ],
-                                ),
-                                Spacer(),
-                                IconButton(
-                                  onPressed: () {
-                                    Get.to(() => TransactionsScreen(),
-                                        arguments: {
-                                          'name': cardInfoList![i].userName
-                                        });
-                                  },
-                                  icon: Icon(Icons.double_arrow_outlined),
-                                  iconSize: 46,
-                                  color: Colors.white,
-                                )
-                              ],
+                            SizedBox(height: Get.height * 0.1 - 50),
+                            Padding(
+                              padding: const EdgeInsets.all(18.0),
+                              child: Row(
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Buses Names :',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      SizedBox(
+                                        height: 6,
+                                      ),
+                                      Text(
+                                        '${cardInfoList![i].busesNames.toString()}',
+                                        style: TextStyle(
+                                            fontSize: 22,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      )
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  IconButton(
+                                    onPressed: () {
+                                      Get.to(() => TransactionsScreen(),
+                                          arguments: {
+                                            'name': cardInfoList![i].userName
+                                          });
+                                    },
+                                    icon: Icon(Icons.double_arrow_outlined),
+                                    iconSize: 46,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                          Spacer(),
-                          Center(
-                              child: SizedBox(
-                            height: Get.height * 0.3 - 60,
-                            child: QrImage(
-                              data: 'google.com',
-                              foregroundColor: Colors.white,
-                            ),
-                          )),
-                          SizedBox(
-                            height: Get.height * 0.1 - 50,
-                          )
-                        ],
+                            Spacer(),
+                            Center(
+                                child: SizedBox(
+                              height: Get.height * 0.3 - 60,
+                              child: QrImage(
+                                data: 'google.com',
+                                foregroundColor: Colors.white,
+                              ),
+                            )),
+                            SizedBox(
+                              height: Get.height * 0.1 - 50,
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              )),
+                )),
+          ),
         ),
       );
     }

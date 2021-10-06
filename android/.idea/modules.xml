@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/android.iml" filepath="$PROJECT_DIR$/.idea/modules/android.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/android.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/android.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-335403023/android.apple_sign_in_safety.iml" filepath="$PROJECT_DIR$/.idea/modules/-335403023/android.apple_sign_in_safety.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/430811479/android.firebase_auth.iml" filepath="$PROJECT_DIR$/.idea/modules/430811479/android.firebase_auth.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/1699561680/android.firebase_core.iml" filepath="$PROJECT_DIR$/.idea/modules/1699561680/android.firebase_core.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/-252419178/android.firebase_messaging.iml" filepath="$PROJECT_DIR$/.idea/modules/-252419178/android.firebase_messaging.iml" />
@@ -13,7 +12,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/-653979229/android.google_sign_in.iml" filepath="$PROJECT_DIR$/.idea/modules/-653979229/android.google_sign_in.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1548496700/android.path_provider.iml" filepath="$PROJECT_DIR$/.idea/modules/-1548496700/android.path_provider.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/593383780/android.shared_preferences.iml" filepath="$PROJECT_DIR$/.idea/modules/593383780/android.shared_preferences.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1029233288/android.sign_in_with_apple.iml" filepath="$PROJECT_DIR$/.idea/modules/-1029233288/android.sign_in_with_apple.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-328168710/android.sign_in_with_apple.iml" filepath="$PROJECT_DIR$/.idea/modules/-328168710/android.sign_in_with_apple.iml" />
     </modules>
   </component>
 </project>

@@ -4,47 +4,26 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="125bad23-d508-4142-a93a-722830314b83" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_appcompat_appcompat_1_0_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_vectordrawable_vectordrawable_1_0_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_vectordrawable_vectordrawable_animated_1_0_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_facebook_android_facebook_android_sdk_4_42_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_facebook_android_facebook_applinks_4_42_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_facebook_android_facebook_common_5_15_3_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_facebook_android_facebook_core_5_15_3_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_facebook_android_facebook_login_5_0_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_facebook_android_facebook_messenger_4_42_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_facebook_android_facebook_places_4_42_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_facebook_android_facebook_share_5_15_3_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_parse_bolts_bolts_android_1_4_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_parse_bolts_bolts_applinks_1_4_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_parse_bolts_bolts_tasks_1_4_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="a655ea86-70b2-4733-bf5e-7cf58dfd079b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/../.flutter-plugins" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/../.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/routes_repo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/routes_repo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/-1029233288/android.sign_in_with_apple.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/-1029233288/android.sign_in_with_apple.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/-1548496700/android.path_provider.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/-1548496700/android.path_provider.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/-252419178/android.firebase_messaging.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/-252419178/android.firebase_messaging.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/-335403023/android.apple_sign_in_safety.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/-335403023/android.apple_sign_in_safety.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/-653979229/android.google_sign_in.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/-653979229/android.google_sign_in.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/124416557/android.flutter_local_notifications.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/124416557/android.flutter_local_notifications.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/1699561680/android.firebase_core.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/1699561680/android.firebase_core.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/430811479/android.firebase_auth.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/430811479/android.firebase_auth.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/593383780/android.shared_preferences.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/593383780/android.shared_preferences.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/728290457/android.flutter_facebook_auth.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/728290457/android.flutter_facebook_auth.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/-1029233288/android.sign_in_with_apple.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/-335403023/android.apple_sign_in_safety.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/app/android.app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/android.app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/ui/auth/splashscreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/ui/auth/splashscreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lib/ui/viewmodel/social_login_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../lib/ui/viewmodel/social_login_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\DELL\.android\avd\Pixel_2_API_30.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[8c1f5d64]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -84,7 +63,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectId" id="1yg0LwTfkPyYisBjFoDDaKE3A8K" />
+  <component name="ProjectId" id="1z5dWz9GjLnLZUmQSejoUhbsHCy" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -93,7 +72,6 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -186,11 +164,11 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="125bad23-d508-4142-a93a-722830314b83" name="Default Changelist" comment="" />
-      <created>1632657871783</created>
+      <changelist id="a655ea86-70b2-4733-bf5e-7cf58dfd079b" name="Default Changelist" comment="" />
+      <created>1633441918157</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1632657871783</updated>
+      <updated>1633441918157</updated>
     </task>
     <servers />
   </component>

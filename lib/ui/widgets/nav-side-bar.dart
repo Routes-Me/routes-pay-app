@@ -72,7 +72,7 @@ class _SideNavBarState extends State<SideNavBar> {
                   style: TextStyle(fontFamily: 'Montserrat-Arabic Regular')),
               leading: const Icon(Icons.exit_to_app),
               onTap: () {
-                if (provider.isSigningIn ) {
+                if (provider.isSigningInGoogle ) {
                   provider.logoutGoogle();
                   Get.offAll(()=> Login());
                 } else if (provider.facebookIsLogin!) {
