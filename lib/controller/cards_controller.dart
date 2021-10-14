@@ -10,6 +10,4 @@ class CardsModel extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
 }

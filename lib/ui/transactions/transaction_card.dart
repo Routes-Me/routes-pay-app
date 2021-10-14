@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:routes_pay/constants/app_textstyle.dart';
 import 'package:routes_pay/data/transaction_data.dart';
 
@@ -12,8 +13,16 @@ class TransactionCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.grey[300]!)),
+          color: Colors.white.withOpacity(1.0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 5,
+              offset: const Offset(5, 6)
+            )
+          ],
+          borderRadius: BorderRadius.circular(5),
+          border: Border.all(color: Colors.grey[900]!)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -48,6 +57,8 @@ class TransactionCard extends StatelessWidget {
                   ),
                   Text(
                     transaction!.month!,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: ApptextStyle.LISTTILE_SUB_TITLE,
                   ),
                 ],
@@ -65,6 +76,8 @@ class TransactionCard extends StatelessWidget {
                 children: [
                   Text(
                     transaction!.currentBalance!,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: ApptextStyle.LISTTILE_TITLE,
                   ),
 
@@ -86,6 +99,8 @@ class TransactionCard extends StatelessWidget {
                       ),
                       Text(
                         transaction!.transactionType!,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: ApptextStyle.LISTTILE_SUB_TITLE,
                       ),
                     ],

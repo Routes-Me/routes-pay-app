@@ -62,7 +62,9 @@ dependencies:
   stacked_card_carousel: 0.0.3-nullsafety.1
   font_awesome_flutter: ^9.1.0
   screen_brightness:
-
+#  stacked: ^2.0.0
+#  stacked_services:
+#  stacked_firebase_auth:
 
 
 

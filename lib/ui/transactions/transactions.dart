@@ -23,7 +23,8 @@ class TransactionsScreen extends StatelessWidget {
               fontSize: 28
           ),
         ),
-        leading: IconButton(onPressed: ()=>Get.back(), icon:Icon(Icons.arrow_back,color: Colors.black,)),
+        leading: IconButton(onPressed: ()=> Get.arguments['dismissed'] !=null?
+            Get.to(()=>Home()): Get.back(), icon:Icon(Icons.arrow_back,color: Colors.black,)),
 
         // actions: [
         //   IconButton(
@@ -36,7 +37,7 @@ class TransactionsScreen extends StatelessWidget {
         // ],
       ),
       body: SingleChildScrollView(
-        physics: ClampingScrollPhysics(),
+        physics: BouncingScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
@@ -59,7 +60,7 @@ class TransactionsScreen extends StatelessWidget {
               ListView.separated(
                   itemCount: myTransactions.length,
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: BouncingScrollPhysics(),
                   separatorBuilder: (context, index) {
                     return const SizedBox(
                       height: 10,
@@ -69,7 +70,7 @@ class TransactionsScreen extends StatelessWidget {
                     return ShakeTransition(
                         axis: Axis.vertical,
                         offest: index.toDouble()*40,
-                        duration: Duration(seconds: index),
+                        duration: Duration(milliseconds: index*300 ),
                         child: TransactionCard(transaction: myTransactions[index]));
                   })
             ],

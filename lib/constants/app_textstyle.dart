@@ -19,6 +19,6 @@ class ApptextStyle {
 
   static const TextStyle LISTTILE_SUB_TITLE = TextStyle(
     color: Colors.grey,
-    fontSize: 15,
+    fontSize: 14,
   );
 }

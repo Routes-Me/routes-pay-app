@@ -38,9 +38,9 @@ class _SideNavBarState extends State<SideNavBar> {
               ),
               decoration: BoxDecoration(
                 color: Colors.orange[600],
-                image:  const DecorationImage(
+                image:   DecorationImage(
                     fit: BoxFit.fill,
-                    image:NetworkImage('https://firebasestorage.googleapis.com/v0/b/routes-pay.appspot.com/o/routes_background.jpg?alt=media&token=c978d6d9-5f96-4c09-aa33-6159c3b2ea43') ),
+                    image:AssetImage('assets/images/routes_background.png') ),
               ),
             ),
             ListTile(
@@ -62,6 +62,13 @@ class _SideNavBarState extends State<SideNavBar> {
             ListTile(
               leading: const Icon(Icons.description),
               title: const Text('Policies',
+                  style: TextStyle(fontFamily: 'Montserrat-Arabic Regular')),
+              // ignore: avoid_returning_null_for_void
+              onTap: () => null,
+            ),const Divider(),
+            ListTile(
+              leading: const Icon(Icons.perm_identity_rounded),
+              title: const Text('Profile',
                   style: TextStyle(fontFamily: 'Montserrat-Arabic Regular')),
               // ignore: avoid_returning_null_for_void
               onTap: () => null,

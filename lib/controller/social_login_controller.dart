@@ -32,8 +32,8 @@ class SocialLoginController extends ChangeNotifier {
   }
 
   Future loginWithGoogle([context]) async {
-
     //save type of login
+
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setInt('type_of_last_login', 1);
     isSigningInGoogle = true;
@@ -179,6 +179,7 @@ class SocialLoginController extends ChangeNotifier {
     final credential = oAuthProvider.credential(
         idToken: appleIdCredential.identityToken,
         accessToken: appleIdCredential.authorizationCode);
+    print(appleIdCredential.familyName);
    try{
      await FirebaseAuth.instance.signInWithCredential(credential).then((value) {
        _token = appleIdCredential.identityToken;

@@ -162,7 +162,7 @@ class _RoutesState extends State<Routes> {
               ))),
       initialRoute: '/',
       routes: {
-        "/": (context) => SplashScreen(),
+        "/": (context) => Home(),
         "/login": (context) => Login(),
         "/signup": (context) => Signup(),
         "/home": (context) => Home(),
