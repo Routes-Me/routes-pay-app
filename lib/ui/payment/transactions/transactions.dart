@@ -5,7 +5,8 @@ import 'package:routes_pay/constants/color_constants.dart';
 import 'package:routes_pay/data/transaction_data.dart';
 import 'package:routes_pay/models/shake_transition.dart';
 import 'package:routes_pay/ui/home/home.dart';
-import 'package:routes_pay/ui/transactions/transaction_card.dart';
+import 'package:routes_pay/ui/payment/transactions/transaction_card.dart';
+import 'package:routes_pay/ui/widgets/zoom_drawer.dart';
 
 class TransactionsScreen extends StatelessWidget {
   const TransactionsScreen({Key? key}) : super(key: key);
@@ -24,7 +25,7 @@ class TransactionsScreen extends StatelessWidget {
           ),
         ),
         leading: IconButton(onPressed: ()=> Get.arguments['dismissed'] !=null?
-            Get.to(()=>Home()): Get.back(), icon:Icon(Icons.arrow_back,color: Colors.black,)),
+            Get.to(()=>MyHomePage(false)): Get.back(), icon:Icon(Icons.arrow_back,color: Colors.black,)),
 
         // actions: [
         //   IconButton(

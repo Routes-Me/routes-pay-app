@@ -3,8 +3,8 @@ import 'package:routes_pay/constants/app_textstyle.dart';
 import 'package:routes_pay/constants/color_constants.dart';
 import 'package:routes_pay/data/card_data.dart';
 import 'package:routes_pay/data/transaction_data.dart';
+import 'package:routes_pay/ui/payment/transactions/transaction_card.dart';
 import 'package:routes_pay/ui/widgets/my_card.dart';
-import 'package:routes_pay/ui/transactions/transaction_card.dart';
 
 class CardsAndTrans extends StatelessWidget {
   const CardsAndTrans({Key? key}) : super(key: key);

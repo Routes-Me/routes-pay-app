@@ -1,8 +1,10 @@
+import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
 import 'package:routes_pay/services/notifications.dart';
@@ -16,7 +18,10 @@ import 'package:routes_pay/controller/cards_controller.dart';
 import 'package:routes_pay/ui/viewmodel/login_viewmodel.dart';
 import 'package:routes_pay/ui/viewmodel/register_viewmodel.dart';
 import 'package:routes_pay/controller/social_login_controller.dart';
-
+import 'package:get_storage/get_storage.dart';
+import 'package:routes_pay/ui/widgets/zoom_drawer.dart';
+import 'controller/lang_controller.dart';
+import 'localization/localization.dart';
 import 'locator.dart';
 
 ///on background
@@ -25,8 +30,9 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print('Handling a background message ${message.messageId}');
   print(message.data);
 }
+
 //request permitions
-requestPermssion()async{
+requestPermssion() async {
   FirebaseMessaging messaging = FirebaseMessaging.instance;
   NotificationSettings settings = await messaging.requestPermission(
     alert: true,
@@ -49,22 +55,18 @@ requestPermssion()async{
 
 /// initial message from terminate
 Future<void> initialMessage() async {
-   await FirebaseMessaging.instance.getInitialMessage().then((message) {
-    if(message !=null){
+  await FirebaseMessaging.instance.getInitialMessage().then((message) {
+    if (message != null) {
       print('init message Ok ,terminate');
-
     }
   });
-
-
 }
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await GetStorage.init();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
-
 
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
@@ -72,7 +74,6 @@ Future<void> main() async {
     sound: true,
   );
   //Notifications
-
 
   setUpLocation();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
@@ -83,7 +84,6 @@ Future<void> main() async {
         ChangeNotifierProvider.value(value: RegisterViewModel()),
         ChangeNotifierProvider.value(value: SocialLoginController()),
         ChangeNotifierProvider.value(value: CardsModel()),
-
       ],
       child: Routes(),
     ));
@@ -98,13 +98,13 @@ class Routes extends StatefulWidget {
 }
 
 class _RoutesState extends State<Routes> {
-
+  final lang = Get.put(LangController());
+  bool chooseLang =false;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     LocalNotificationService.initialize(context);
-
     initialMessage();
     requestPermssion();
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
@@ -124,12 +124,15 @@ class _RoutesState extends State<Routes> {
         print('message onOpen Ok');
       }
     });
-
   }
 
   @override
   Widget build(BuildContext context) {
+
     return GetMaterialApp(
+      locale: Locale('en'),
+      fallbackLocale: Locale('en'),
+      translations: Localization(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           scaffoldBackgroundColor: Colors.white,
@@ -162,13 +165,33 @@ class _RoutesState extends State<Routes> {
               ))),
       initialRoute: '/',
       routes: {
-        "/": (context) => Home(),
+        "/": (context) => MyHomePage(false),
         "/login": (context) => Login(),
         "/signup": (context) => Signup(),
-        "/home": (context) => Home(),
+        "/home": (context) => MyHomePage(false),
         "/renewal": (context) => RenewalToken(),
         "/login-with-social": (context) => LoginWithSocial(),
       },
+
+      //to get and set current localisation
+
+      // supportedLocales: [
+      //   Locale('en', ''),
+      //   Locale('ar', ''),
+      //   Locale('hi', ''),
+      // ],
+
+      // localeResolutionCallback: (currentLocale, supportedLocales) {
+      //  Timer(Duration(milliseconds: 10),() {
+      //   if(!chooseLang &&currentLocale !=null){
+      //     lang.changeLang(currentLocale.languageCode);
+      //     Get.updateLocale(Locale(currentLocale.languageCode));
+      //     lang.changeDIR(currentLocale.languageCode);
+      //   }
+      //   chooseLang =true;
+      //  });
+      //   return supportedLocales.first;
+      // },
     );
   }
 }

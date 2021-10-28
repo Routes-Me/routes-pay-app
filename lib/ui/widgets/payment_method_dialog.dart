@@ -1,265 +1,208 @@
+import 'dart:async';
+import 'package:convert/convert.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:routes_pay/controller/lang_controller.dart';
+import 'package:routes_pay/payment/check_out.dart';
+import 'package:routes_pay/payment/my_fatoorh_checkout.dart';
+import 'package:routes_pay/ui/payment/visa_master_method.dart';
 
-Future<void> showD( context)async{
-  return await showDialog(context: context, builder: (context){
-    var globalKey =GlobalKey<FormState>();
-    int? value = 1 ;
+Future<void> showD(context, card) async {
+  final LangController lang = Get.find();
+  final screenSize = MediaQuery.of(context).size;
+  CheckOut checkOut = CheckOut();
+  MyFatoorah myFatoorh = MyFatoorah();
 
+  final String mAPIKey = "rLtt6JWvbUHDDhsZnfpAhpYk4dxYDQkbcPTyGaKp2TYqQgG7FGZ5Th_WD53Oq8Ebz6A53njUoo1w3pjU1D4vs_ZMqFiz_j0urb_BH9Oq9VZoKFoJEDAbRZepGcQanImyYrry7Kt6MnMdgfG5jn4HngWoRdKduNNyP4kzcp3mRv7x00ahkm9LAK7ZRieg7k1PDAnBIOG3EyVSJ5kK4WLMvYr7sCwHbHcu4A5WwelxYK0GMJy37bNAarSJDFQsJ2ZvJjvMDmfWwDVFEVe_5tOomfVNt6bOg9mexbGjMrnHBnKnZR1vQbBtQieDlQepzTZMuQrSuKn-t5XZM7V6fCW7oP-uXGX-sMOajeX65JOf6XVpk29DP6ro8WTAflCDANC193yof8-f5_EYY-3hXhJj7RBXmizDpneEQDSaSz5sFk0sV5qPcARJ9zGG73vuGFyenjPPmtDtXtpx35A-BVcOSBYVIWe9kndG3nclfefjKEuZ3m4jL9Gg1h2JBvmXSMYiZtp9MR5I6pvbvylU_PP5xJFSjVTIz7IQSjcVGO41npnwIxRXNRxFOdIUHn0tjQ-7LwvEcTXyPsHXcMD8WtgBh-wxR8aKX7WPSsT1O8d8reb2aR7K3rkV3K82K_0OgawImEpwSvp9MNKynEAJQS6ZHe_J_l77652xwPNxMRTMASk1ZsJL";
 
-    return StatefulBuilder(builder: (context,setState){
-      return Container(
-        width: MediaQuery.of(context).size.width,
+  return await showDialog(
+      context: context,
+      builder: (context) {
+        int? value = 1;
+        double? kNetPos = 600;
 
-        child: AlertDialog(
-          insetPadding: EdgeInsets.only(top: 93),
-          contentPadding: EdgeInsets.all(5),
-          content: SingleChildScrollView(
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height:MediaQuery.of(context).size.height -100,
-              child: Form(
-                  key: globalKey,
-                  child: Column(
+        return StatefulBuilder(builder: (context, setState) {
+          Timer(Duration(milliseconds: 2), () {
+            setState(() {
+              kNetPos = 290.0;
+            });
+          });
+          return Container(
+            width: screenSize.width,
+            child: AlertDialog(
+              backgroundColor: Colors.white,
+              insetPadding: EdgeInsets.only(top: 0.0),
+              contentPadding: EdgeInsets.all(5),
+              content: Center(
+                child: SizedBox(
+                  width: screenSize.width,
+                  height: screenSize.height,
+                  child: Stack(
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 20.0),
-                        child: Text('Payment'),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 20.0),
-                        child: Text('Please choose payment method'),
-                      ),
-                      SizedBox(height: 20,),
-
-                      Container(
-                        width: MediaQuery.of(context).size.width - 20,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.grey.shade300
+                      Positioned(
+                          top: 3,
+                          left: MediaQuery.of(context).size.width - 50,
+                          child: IconButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            icon: Icon(Icons.cancel_outlined),
+                            color: Colors.blue.shade900,
+                          )),
+                      Positioned(
+                        top: 190,
+                        left: lang.appLocal == 'en'
+                            ? screenSize.width / 2 - 120
+                            : screenSize.width / 2 - 80,
+                        child: Text(
+                          'choz_method'.tr,
+                          textAlign: TextAlign.center,
                         ),
-                        child: InkWell(
-                          onTap: (){
-                            setState(() {
-                              value = 1 ;
-                              print(value);
-                            });
-                          },
-                          child: Row(
+                      ),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      Positioned(
+                          top: 20,
+                          right: lang.appLocal == 'en'
+                              ? screenSize.width / 2 - 80
+                              : screenSize.width / 2 - 70,
+                          child: Center(
+                              child: RichText(
+                            text: TextSpan(
+                                text: 'amount'.tr,
+                                style: TextStyle(
+                                    fontSize: 22, color: Colors.grey.shade900),
+                                children: [
+                                  TextSpan(
+                                      text: card.cardBalance.toStringAsFixed(3),
+                                      style: TextStyle(
+                                          fontSize: 24,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold))
+                                ]),
+                          ))),
+                      AnimatedPositioned(
+                        duration: Duration(milliseconds: 300),
+                        top: kNetPos,
+                        child: SizedBox(
+                          height: 700,
+                          width: MediaQuery.of(context).size.width,
+                          child: ListView(
                             children: [
-                              Radio(value: 1, groupValue: value, onChanged: (val){
-                                setState(() {
-                                  value = val as int? ;
-                                  print(value);
-                                });
-                              }),
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                                child: Image.asset('assets/images/knetl.png',
-                                  height: 30,
-                                  fit: BoxFit.fill,
-                                ),
-                              )
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 100.0),
+                                child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width - 200,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.grey.shade300),
+                                  child: InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        value = 1;
+                                        print(value);
+                                        myFatoorh.initiate(context,card.cardBalance.toDouble(),1);
 
+                                      });
+                                    },
+                                    child: Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 45.0, vertical: 5),
+                                        child: Image.asset(
+                                          'assets/images/knet_logo2.png',
+                                          height: 40,
+                                          width: 40,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 100.0),
+                                child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width - 200,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.grey.shade300),
+                                  child: InkWell(
+                                    onTap: () {
+                                      myFatoorh.initiate(context,card.cardBalance.toDouble(),2);
+
+                                      // Navigator.of(context).push(
+                                      //     MaterialPageRoute(
+                                      //         builder: (context) =>
+                                      //             VisaMasterMethod()),
+                                      // );
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 45.0, vertical: 5),
+                                      child: Image.asset(
+                                        'assets/images/visaLogo2.png',
+                                        height: 40,
+                                        width: 40,
+                                        fit: BoxFit.fitHeight,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 100.0),
+                                child: Container(
+                                  width: screenSize.width - 200,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.grey.shade300),
+                                  child: InkWell(
+                                    onTap: () {
+                                        value = 1;
+                                        print(value);
+                                        myFatoorh.initiate(context,card.cardBalance.toDouble(),2);
+
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 45.0, vertical: 5),
+                                      child: Image.asset(
+                                        'assets/images/masterCard_2.png',
+                                        height: 40,
+                                        width: 40,
+                                        fit: BoxFit.fitHeight,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),
                       ),
-                      SizedBox(height: 10,),
-                      Container(
-                        width: MediaQuery.of(context).size.width - 20,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.grey.shade300
-                        ),
-                        child: InkWell(
-                          onTap: (){
-                            setState(() {
-                              value = 2 ;
-
-
-                              print(value);
-                            });
-                          },
-                          child: Row(
-                            children: [
-                              Radio(value: 2, groupValue: value, onChanged: ( val){
-                                setState(() {
-                                  value =val as int?;
-                                  print(value);
-
-                                });
-                              }),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                                child: Image.asset('assets/images/mastercard-home-green-star-heating-cooling-17.png',
-                                  height: 30,
-                                  fit: BoxFit.fill,
-                                ),
-                              )
-
-                            ],
-                          ),
-                        ),
+                      SizedBox(
+                        height: 20,
                       ),
-                      SizedBox(height: 20,),
-                      value == 2 ? Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal:12.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    SizedBox(
-                                      width: 260,
-                                      child: TextFormField(
-                                        keyboardType: TextInputType.number,
-                                        validator: (val) {
-                                          if (val!.isEmpty) {
-                                            return 'Invalid Value';
-                                          } else {
-                                            return null;
-                                          }
-                                        },
-                                        decoration: const InputDecoration(
-                                          hintText: 'Card Number',
-
-                                          // prefixIcon: Icon(Icons.payment),
-                                          // border: OutlineInputBorder(),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                SizedBox(height: 16,),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      width: 50,
-                                      child: TextFormField(
-                                        maxLength: 2,
-                                        keyboardType: TextInputType.number,
-                                        validator: (val) {
-                                          if (val!.isEmpty) {
-                                            return 'Invalid Value';
-                                          } else {
-                                            return null;
-                                          }
-                                        },
-                                        decoration: const InputDecoration(
-                                          hintText: 'Month',
-
-                                          // prefixIcon: Icon(Icons.payment),
-                                          // border: OutlineInputBorder(),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 50,
-                                      child: TextFormField(
-                                        maxLength: 4,
-                                        keyboardType: TextInputType.number,
-                                        validator: (val) {
-                                          if (val!.isEmpty) {
-                                            return 'Invalid Value';
-                                          } else {
-                                            return null;
-                                          }
-                                        },
-                                        decoration: const InputDecoration(
-                                          hintText: 'Year',
-                                          // prefixIcon: Icon(Icons.payment),
-                                          // border: OutlineInputBorder(),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 50,
-                                      child: TextFormField(
-                                        keyboardType: TextInputType.number,
-                                        maxLength: 3,
-                                        validator: (val) {
-                                          if (val!.isEmpty) {
-                                            return 'Invalid Value';
-                                          } else {
-                                            return null;
-                                          }
-                                        },
-                                        decoration: const InputDecoration(
-                                          hintText: 'CVV',
-
-                                          // prefixIcon: Icon(Icons.payment),
-                                          // border: OutlineInputBorder(),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                SizedBox(height: 16,),
-                                Row(
-                                  children: [
-                                    SizedBox(
-                                      width: 260,
-                                      child: TextFormField(
-                                        validator: (val) {
-                                          if (val!.isEmpty) {
-                                            return 'Invalid Value';
-                                          } else {
-                                            return null;
-                                          }
-                                        },
-                                        decoration: const InputDecoration(
-                                          hintText: 'Card Holder Name',
-
-                                          // prefixIcon: Icon(Icons.payment),
-                                          // border: OutlineInputBorder(),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 28.0,right: 12.0,left: 12.0),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                ElevatedButton.icon(onPressed: (){
-
-                                  if(globalKey.currentState!.validate()){
-                                    print('ok');
-                                  }else{
-                                    print('bad value');
-                                  }
-                                }, icon: Icon(Icons.account_balance_wallet_outlined), label: Text('Submit')),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ):Container(),
-                      value==1?SizedBox(
-                        width: 160,
-                        child: ElevatedButton.icon(
-                            onPressed: (){
-
-                            }, icon: Icon(Icons.payment), label: Padding(
-                          padding: const EdgeInsets.only(left: 18.0),
-                          child: const Text('CheckOut'),
-                        )),
-                      ):Container()
                     ],
-                  )),
+                  ),
+                ),
+              ),
             ),
-          ),
-        ),
-      );
-    });
-  });
+          );
+        });
+      });
 }

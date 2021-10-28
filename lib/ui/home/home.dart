@@ -8,16 +8,18 @@ import 'package:routes_pay/data/transaction_data.dart';
 import 'package:routes_pay/encrption/AES.dart';
 import 'package:routes_pay/models/card_info_model.dart';
 import 'package:routes_pay/models/shake_transition.dart';
+import 'package:routes_pay/payment/check_out.dart';
 import 'package:routes_pay/ui/home/card_details.dart';
-import 'package:routes_pay/ui/transactions/transaction_card.dart';
-import 'package:routes_pay/ui/transactions/transactions.dart';
+import 'package:routes_pay/ui/payment/transactions/transaction_card.dart';
 import 'package:routes_pay/ui/widgets/nav-side-bar.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 
 import '../recharge_screen.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  final zoomDrawerController ;
+
+  const Home(this.zoomDrawerController) ;
 
   @override
   _HomeState createState() => _HomeState();
@@ -78,16 +80,16 @@ class _HomeState extends State<Home> {
         rightColor: Color.fromARGB(255, 171, 22, 75),
         leftColor: Color.fromARGB(255, 191, 81, 75),
       ),
-      CardInfo(
-        userName: "Daily Pass",
-        durationCard: '1 day',
-        cardBalance: 1.000,
-        busesNames: ' X4 , 66 , 101',
-        expireDate: DateFormat('yyyy-MM-dd')
-            .format(DateTime.now().add(Duration(days: 1))),
-        rightColor: Color.fromARGB(255, 171, 155, 75),
-        leftColor: Color.fromARGB(255, 244, 51, 75),
-      ),
+      // CardInfo(
+      //   userName: "Daily Pass",
+      //   durationCard: '1 day',
+      //   cardBalance: 1.000,
+      //   busesNames: ' X4 , 66 , 101',
+      //   expireDate: DateFormat('yyyy-MM-dd')
+      //       .format(DateTime.now().add(Duration(days: 1))),
+      //   rightColor: Color.fromARGB(255, 171, 155, 75),
+      //   leftColor: Color.fromARGB(255, 244, 51, 75),
+      // ),
       CardInfo(
         userName: "Daily Pass",
         durationCard: '3 day',
@@ -107,16 +109,15 @@ class _HomeState extends State<Home> {
 
   getToken() async {
     token = await FirebaseMessaging.instance.getToken();
-    setState(() {
+
       token = token;
-    });
     print('Token : $token');
   }
 
 //setBrightness
   Future<void> setBrightness(double brightness) async {
     try {
-      await ScreenBrightness.setScreenBrightness(brightness);
+      await ScreenBrightness().setScreenBrightness(brightness);
     } catch (e) {
       print(e);
       throw 'Failed to set brightness';
@@ -198,240 +199,7 @@ class _HomeState extends State<Home> {
 
                             ),
                           );
-                          //setState(() {
-                          // height = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
-                          // height[i] = 364.0;
-                          // showQRCode = true;
-                          // transactionsShow = true;
-                          // if (i == 0) {
-                          //   setBrightness(1.0);
-                          //   pos = [
-                          //     0.0,
-                          //     345.0,
-                          //     435.0,
-                          //     525.0,
-                          //     615.0,
-                          //     705.0,
-                          //     795.0
-                          //   ];
-                          // } else {
-                          //   setBrightness(1.0);
-                          //   pos = [
-                          //     380.0,
-                          //     480.0,
-                          //     580.0,
-                          //     680.0,
-                          //     780.0,
-                          //     880.0,
-                          //     980.0
-                          //   ];
-                          //   switch (i) {
-                          //     case 1:
-                          //       pos = [
-                          //         380.0,
-                          //         480.0,
-                          //         480.0,
-                          //         580.0,
-                          //         680.00,
-                          //         780.0,
-                          //         880.0
-                          //       ];
-                          //       break;
-                          //     case 2:
-                          //       pos = [
-                          //         380.0,
-                          //         480.0,
-                          //         480.0,
-                          //         580.0,
-                          //         680.0,
-                          //         780.0,
-                          //         880.0
-                          //       ];
-                          //       break;
-                          //     case 3:
-                          //       pos = [
-                          //         380.0,
-                          //         480.0,
-                          //         580.0,
-                          //         680.0,
-                          //         680.0,
-                          //         780.0,
-                          //         880.0
-                          //       ];
-                          //       break;
-                          //     case 4:
-                          //       pos = [
-                          //         380.0,
-                          //         480.0,
-                          //         580.0,
-                          //         680.0,
-                          //         780.0,
-                          //         780.0,
-                          //         880.0
-                          //       ];
-                          //       break;
-                          //     case 5:
-                          //       pos = [
-                          //         380.0,
-                          //         480.0,
-                          //         580.0,
-                          //         680.0,
-                          //         780.0,
-                          //         880.0,
-                          //         880.0
-                          //       ];
-                          //       break;
-                          //     case 6:
-                          //       pos = [
-                          //         380.0,
-                          //         480.0,
-                          //         580.0,
-                          //         680.0,
-                          //         780.0,
-                          //         880.0,
-                          //         880.0
-                          //       ];
-                          //       break;
-                          //   }
-                          // }
-                          //pos[i] = 3.0 * i;
-                          //controller!.position.jumpTo(0.0);
-                          // });
 
-                          // if (i == indexOfCardOpen) {
-                          //   tapsCount++;
-                          //   setBrightness(0.6);
-                          //   setState(() {
-                          //     showQRCode = false;
-                          //     transactionsShow = false;
-                          //     height = [
-                          //       364.0,
-                          //       364.0,
-                          //       364.0,
-                          //       364.0,
-                          //       364.0,
-                          //       364.0,
-                          //       364.0
-                          //     ];
-                          //     pos = [
-                          //       3.0,
-                          //       90.0,
-                          //       180.0,
-                          //       270.0,
-                          //       360.0,
-                          //       450.0,
-                          //       540.0
-                          //     ];
-                          //   });
-                          //   visibleCard = false;
-                          //   print(tapsCount);
-                          //   print('back');
-                          // } else {
-                          //   tapsCount = 0;
-                          // }
-                          // if (tapsCount > 1) {
-                          //   setState(() {
-                          //     showQRCode = true;
-                          //     transactionsShow = true;
-                          //     height = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0];
-                          //     height[i] = 364.0;
-                          //     if (i == 0) {
-                          //       setBrightness(1.0);
-                          //       pos = [
-                          //         0.0,
-                          //         345.0,
-                          //         435.0,
-                          //         525.0,
-                          //         615.0,
-                          //         705.0,
-                          //         795.0
-                          //       ];
-                          //     } else {
-                          //       setBrightness(1.0);
-                          //       pos = [
-                          //         355.0,
-                          //         445.0,
-                          //         535.0,
-                          //         625.0,
-                          //         715.0,
-                          //         805.0,
-                          //         895.0
-                          //       ];
-                          //       switch (i) {
-                          //         case 1:
-                          //           pos = [
-                          //             380.0,
-                          //             480.0,
-                          //             480.0,
-                          //             580.0,
-                          //             680.00,
-                          //             780.0,
-                          //             880.0
-                          //           ];
-                          //           break;
-                          //         case 2:
-                          //           pos = [
-                          //             380.0,
-                          //             480.0,
-                          //             480.0,
-                          //             580.0,
-                          //             680.0,
-                          //             780.0,
-                          //             880.0
-                          //           ];
-                          //           break;
-                          //         case 3:
-                          //           pos = [
-                          //             380.0,
-                          //             480.0,
-                          //             580.0,
-                          //             680.0,
-                          //             680.0,
-                          //             780.0,
-                          //             880.0
-                          //           ];
-                          //           break;
-                          //         case 4:
-                          //           pos = [
-                          //             380.0,
-                          //             480.0,
-                          //             580.0,
-                          //             680.0,
-                          //             780.0,
-                          //             780.0,
-                          //             880.0
-                          //           ];
-                          //           break;
-                          //         case 5:
-                          //           pos = [
-                          //             380.0,
-                          //             480.0,
-                          //             580.0,
-                          //             680.0,
-                          //             780.0,
-                          //             880.0,
-                          //             880.0
-                          //           ];
-                          //           break;
-                          //         case 6:
-                          //           pos = [
-                          //             380.0,
-                          //             480.0,
-                          //             580.0,
-                          //             680.0,
-                          //             780.0,
-                          //             880.0,
-                          //             880.0
-                          //           ];
-                          //           break;
-                          //       }
-                          //     }
-                          //     pos[i] = 5.0 * i;
-                          //     controller!.position.jumpTo(0.0);
-                          //     tapsCount = 0;
-                          //   });
-                          // }
-                          // indexOfCardOpen = i;
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -556,7 +324,9 @@ class _HomeState extends State<Home> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    controller!.dispose();
+    if(controller !=null){
+      controller!.dispose();
+    }
   }
 
   void listenBottomCard() {
@@ -597,6 +367,11 @@ class _HomeState extends State<Home> {
                 fontFamily: 'Montserrat-Arabic Regular', fontSize: 24)),
         centerTitle: true,
         backgroundColor: Colors.blue.shade900,
+        leading: InkWell(
+          onTap: (){
+            widget.zoomDrawerController.toggle();
+          },
+          child: Icon(Icons.menu),),
       ),
       body: ListView(
           controller: controller,

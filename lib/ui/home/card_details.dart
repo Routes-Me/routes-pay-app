@@ -1,11 +1,12 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:routes_pay/data/transaction_data.dart';
 import 'package:routes_pay/models/shake_transition.dart';
-import 'package:routes_pay/ui/transactions/transaction_card.dart';
+import 'package:routes_pay/ui/payment/transactions/transaction_card.dart';
 import 'package:routes_pay/ui/widgets/payment_method_dialog.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 
@@ -49,7 +50,7 @@ class _CardDetailsState extends State<CardDetails> {
 //setBrightness
   Future<void> setBrightness(double brightness) async {
     try {
-      await ScreenBrightness.setScreenBrightness(brightness);
+     await ScreenBrightness().setScreenBrightness(brightness);
     } catch (e) {
       print(e);
       throw 'Failed to set brightness';
@@ -63,17 +64,17 @@ class _CardDetailsState extends State<CardDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar( centerTitle: true,
-        title: Text('Details',style: TextStyle(
+        title: Text('details_title'.tr,style: TextStyle(
           fontSize: 22,
           color: widget.cardInfo.leftColor,
         ),),
         foregroundColor: widget.cardInfo.leftColor,
       actions: [
         TextButton(onPressed: (){
-          showD(context);
+          showD(context,widget.cardInfo);
         }, child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
-          child: Text('Recharge',style: TextStyle(
+          child: Text('btn_recharge'.tr,style: TextStyle(
             fontSize: 14,
             color: widget.cardInfo.leftColor
           ),),
@@ -133,7 +134,7 @@ class _CardDetailsState extends State<CardDetails> {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
-                                    '${widget.cardInfo.cardBalance!.toStringAsFixed(3)} KD',
+                                    '${widget.cardInfo.cardBalance!.toStringAsFixed(3)} K.D',
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 22),
                                   ),

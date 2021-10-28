@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:routes_pay/ui/auth/login.dart';
 import 'package:routes_pay/ui/home/home.dart';
 import 'package:routes_pay/controller/social_login_controller.dart';
+import 'package:routes_pay/ui/widgets/zoom_drawer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -38,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return done
         ? Login() :Consumer<SocialLoginController>(
-      builder: (context,data,_)=>data.signedIn ?Home(): Scaffold(
+      builder: (context,data,_)=>data.signedIn ?MyHomePage(false): Scaffold(
               body: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
